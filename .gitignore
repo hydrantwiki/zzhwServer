@@ -1,0 +1,4 @@
+src/Site/bin/
+*.user
+*.suo
+src/Site/obj/

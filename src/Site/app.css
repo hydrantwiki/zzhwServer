@@ -1,0 +1,699 @@
+﻿body 
+{
+    background-color:Black;
+    background-position:center;
+    width:800px;
+    height:600px;
+    margin-top:20px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+form.formBody
+{
+    background-color:White;
+    position:absolute;
+    width:800px;
+    height:600px;
+    
+}
+
+div.application
+{
+    position:absolute;
+    left:200px;
+    top:220px;
+    height:100px;
+    width:200px;
+    bottom: 280px;
+}
+
+div.frame
+{
+    width:100%;
+}
+
+div.summary
+{
+    position:absolute;
+    top:98px;
+    left:0px;
+    height:20px;
+    width:600px;
+}
+
+span.hydrant_title
+{
+    position:absolute;
+    font-family:Tahoma;
+    font-size:20px;
+    font-weight:bold;
+    left:10px;
+}
+
+span.tag_title
+{
+    position:absolute;
+    font-family:Tahoma;
+    font-weight:bold;
+    font-size:20px;
+    left:190px;
+}
+
+span.user_title
+{
+    position:absolute;
+    font-family:Tahoma;
+    font-size:20px;
+    font-weight:bold;
+    left:390px;
+}
+
+div.overview
+{
+    position:absolute;
+    top:115px;
+    width:580px;
+    height:500px;
+    margin-left:10px;
+    margin-right:10px;
+    padding-bottom:10px;
+}
+
+div.title
+{
+    position:absolute;
+    top:10px;
+    width:590px;
+    height:50px;
+    text-align:Left;
+    font-family:Tahoma;
+    font-size:26px;
+    font-weight:bold;
+    margin-left:10px;
+}
+
+div.masterHeader
+{
+    position:absolute;
+    width:800px;
+    height:120px;
+    top:0px;
+    left:0px;
+}
+
+div.masterTitle
+{
+    position:absolute;
+    top:120px;
+    width:590px;
+    height:50px;
+    text-align:Left;
+    font-family:Tahoma;
+    font-size:26px;
+    font-weight:bold;
+    margin-left:10px;
+}
+
+div.login
+{
+    position:absolute;
+    left:100px;
+    top:200px;
+    width:400px;
+    height:200px;
+}
+
+div.registerBody
+{
+    position:absolute;
+    left:200px;
+    top:200px;
+    width:400px;
+    height:200px;
+}
+
+div.license
+{
+    position:absolute;
+    left:10px;
+    top:540px;
+    width:580px;
+    height:60px;
+    text-align:center;
+    font-family:Tahoma;
+    font-size:10px;
+    font-weight:normal;
+}
+
+div.side
+{
+    position:absolute;
+    left:600px;
+    top:100px;
+    width:200px;
+    height:500px;        
+    z-index:1;
+}
+
+div#MyTagsLogo
+{
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:800px;
+    height:80px;
+}
+
+div#MyTagsHeader
+{
+    position:absolute;
+    left:0px;
+    top:80px;
+    width:800px;
+    height:50px;
+}
+
+div#MyTagsButtonBar
+{
+    position:absolute;
+    left:10px;
+    top:125px;
+    width:490px;
+    height:30px;
+}
+
+div#MyTagsMap
+{
+    position:absolute;
+    left:495px;
+    width:290px;
+    height:423px;
+    top:146px;
+    background-color:Gray;
+    margin:5px;
+    border:2px;
+    border-style:solid;
+    border-color:Gray;
+}
+
+div#MyTagsTable
+{
+    position:absolute;
+    left:10px;
+    width:490px;
+    height:400px;
+    top:150px;
+}
+
+p.title
+{
+    font-family:Tahoma;
+    font-size:14px;  
+    font-weight:bold; 
+    padding-bottom:0px; 
+    margin-bottom:0px;
+}
+
+p.text
+{
+    font-family:Tahoma;
+    font-size:12px;
+    padding-top:0px; 
+    margin-top:0px;    
+}
+
+.HomeLink
+{
+    position:absolute;
+    left:10px;
+    top:10px;
+    font-family:Tahoma;
+    font-size:20px;
+}
+
+.lblMyTagsHeader
+{
+    Position:absolute;
+    top:5px;
+    left:100px;
+    width:600px;
+    text-align:center;
+    font-size:30px;
+    font-family:Tahoma;   
+}
+
+.lblMasterTitle
+{
+    Position:absolute;
+    top:5px;
+    left:100px;
+    width:600px;
+    text-align:center;
+    font-size:30px;
+    font-family:Tahoma;   
+}
+
+.homeUserWelcome
+{
+    position:absolute;
+    text-align:left;
+    font-size:30px;
+    font-family:Tahoma;
+}
+
+.HomeMenu
+{
+    position:absolute;
+    top:150px;
+    left:10px;
+    width:780px;
+    text-align:left;
+    font-size:20px;
+    font-family:Tahoma;        
+}
+
+.btnDelete
+{
+    position:absolute;
+    top:0px;
+    left:390px;
+    width:100px;
+}
+
+.btnFirstPage
+{
+    position:absolute;
+    top:0px;
+    left:10px;
+    width:100px;
+}
+
+.btnNextPage
+{
+    position:absolute;
+    top:0px;
+    left: 100px;
+    width:100px;
+}
+
+div.homeHeader
+{
+    position:absolute;
+    width:800px;
+    height:120px;
+    top:0px;
+    left:0px;
+}
+
+div.homeMenu
+{
+    position:absolute;
+    width:200px;
+    top:120px;
+    height:480px;
+    left:0px;
+}
+
+div.homeMain
+{
+    position:absolute;
+    width:650px;
+    top:120px;
+    height:480px;
+    left:200px;
+    padding-left:10px;
+}
+
+div#ReviewTagsLogo
+{
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:800px;
+    height:80px;
+}
+
+div#ReviewTagsHeader
+{
+    position:absolute;
+    left:0px;
+    top:80px;
+    width:800px;
+    height:40px;
+}
+
+div#ReviewTagsBody
+{
+    position:absolute;
+    left:0px;
+    top:120px;
+    height:470px;
+    width:800px;
+}
+
+.lblUserID
+{
+    position:absolute;
+    left:10px;
+    top:25px;
+    height:30px;
+    width:300px;
+}
+
+.lblTagDateTime
+{
+    position:absolute;
+    left:10px;
+    top:42px;
+    height:30px;
+    width:300px;
+}
+
+.imgTagImage
+{
+    position:absolute;
+    Left:0px;
+    top:0px;   
+}
+
+div.imageBody
+{
+    position:absolute;
+    Left:10px;
+    top:60px;
+    width:95px;
+    height:155px;
+    border-width:1px;
+    border-style:solid; 
+    border-color:DarkGray;
+}
+
+div.mapBody
+{
+    position:absolute;
+    left:330px;
+    top:10px;
+    width:450px;
+    height:450px;
+    border-width:1px;
+    border-style:solid; 
+    border-color:DarkGray;
+}
+
+div.panoBody
+{
+    position:absolute;
+    left:10px;
+    top:220px;
+    width:310px;
+    height:240px;
+    border-width:1px;
+    border-style:solid;  
+    border-color:DarkGray;  
+}
+
+div.nearHydrants
+{
+    position:absolute;
+    left:110px;
+    top:60px;
+    width:210px;
+    height:155px;
+}
+
+#btnGetTag
+{
+    position:absolute;
+    left:10px;
+    top:0px;
+}
+
+
+#btnAccept
+{
+    position:absolute;
+    left:260px;
+    top:0px;
+}
+
+#btnReject
+{
+    position:absolute;
+    left:150px;
+    top:0px;
+}
+
+div.hydrantsMap
+{
+    position:absolute;
+    left:10px;
+    width:465px;
+    height:465px;
+    top:125px;
+    border-width:1px;
+    border-style:solid; 
+    border-color:DarkGray;
+}
+
+div.hydrantDetails
+{
+    position:absolute;
+    left:485px;
+    width:305px;
+    height:465px;
+    top:125px;
+    border-width:1px;
+    border-style:solid; 
+    border-color:DarkGray;
+}
+
+#txtUserName
+{
+    position:absolute;
+    left:150px;
+    top:5px;
+    width:200px;
+}
+
+#lblUserName
+{
+    position:absolute;
+    left:50px;
+    top:5px;
+    height: 19px;
+}
+
+#txtPassword
+{
+    position:absolute;
+    left:150px;
+    top:30px;  
+    width:200px; 
+}
+
+#lblPassword
+{
+    position:absolute;
+    left:50px;
+    top:30px;
+}
+
+div.chkRemember
+{
+    position:absolute;
+    left:145px;
+    top:55px;
+    width:300px;
+}
+
+#btnLogin
+{
+    position:absolute;
+    left:300px;
+    top:80px; 
+    
+}
+
+#btnRegister
+{
+    position:absolute;
+    left:50px;
+    top:80px; 
+}
+
+#lblStatus
+{
+    position:absolute;
+    left:50px;
+    top:115px;
+}
+
+#btnEnterApp
+{
+    position:absolute;
+    left:300px;
+    top:80px;
+}
+
+#btnLogOut
+{
+    position:absolute;
+    left:50px;
+    top:80px; 
+}
+
+/* */
+
+
+#lblUserNameAvailable
+{
+    position:absolute;
+    left:355px;
+    top:5px;  
+    width:100px; 
+
+}
+
+#lblEmailAddress
+{
+    position:absolute;
+    left:50px;
+    top:30px;  
+    width:100px; 
+}
+
+#txtEmailAddress
+{
+    position:absolute;
+    left:150px;
+    top:30px;  
+    width:200px;     
+}
+
+#lblEmailAvailable
+{
+    position:absolute;
+    left:355px;
+    top:30px;  
+    width:100px;     
+}
+
+#txtPasswordFirst
+{
+    position:absolute;
+    left:150px;
+    top:55px;  
+    width:200px; 
+}
+
+#lblPasswordFirst
+{
+    position:absolute;
+    left:50px;
+    top:55px;
+}
+
+#lblPasswordReenter
+{
+    position:absolute;
+    left:50px;
+    top:80px;  
+    width:100px; 
+
+}
+
+#txtPasswordReenter
+{
+    position:absolute;
+    left:150px;
+    top:80px;  
+    width:200px; 
+}
+
+
+
+#btnCreateAccount
+{
+    position:absolute;
+    left:240px;
+    top:110px;  
+
+}
+
+
+
+tr.hdHeaderRow
+{
+    font-weight:bold;
+    text-align:center;
+    font-size:24px;
+    font-family:Tahoma;
+    background-color:Silver;
+    border-width:2px;
+    border-style:solid;
+}
+
+td.hdHeaderColumn
+{
+    height:25px;
+}
+
+tr.hdPosition
+{
+}
+
+td.hdPositionTitle
+{
+    height:20px;
+    font-family:Tahoma;
+    font-size:18px;
+    font-weight:bold;
+}
+
+td.hdPositionValue
+{
+    height:20px;
+    font-family:Tahoma;
+    font-size:18px;
+}
+
+tr.hdImageRow
+{
+}
+
+td.hdImageColumn
+{
+    height:100px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+tr.hdTaggersRow
+{
+    text-align:center;
+    background-color:Silver;
+    font-family:Tahoma;
+    font-size:18px;
+    font-weight:bold;
+}
+
+td.hdTaggersColumn
+{
+    height:25px;
+    
+}
+
+tr.hdTaggerRow
+{
+    text-align:center;
+    font-family:Tahoma;
+    font-size:18px;
+    font-weight:normal;
+}
+
+td.hdTaggerColumn
+{
+    height:25px;
+    
+}
