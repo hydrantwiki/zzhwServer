@@ -2,3 +2,4 @@ src/Site/bin/
 *.user
 *.suo
 src/Site/obj/
+src/Site/Web.config
