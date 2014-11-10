@@ -1,0 +1,11 @@
+﻿@Master['master.sshtml']
+
+@Section['Title']
+@EndSection
+
+@Section['Head']
+@EndSection
+
+@Section['Content']
+You have been logged out.
+@EndSection

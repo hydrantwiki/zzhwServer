@@ -1,0 +1,36 @@
+﻿@Master['master.sshtml']
+
+@Section['Title']
+My tags
+@EndSection
+
+@Section['Head']
+	<link rel="stylesheet" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
+	<script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+@EndSection
+
+@Section['Content']
+   @Partial['menu.sshtml'];
+   <script>
+		$( document ).ready(function() {
+			GetTags();
+		});
+	</script>
+
+   <div class="app_body">
+	   <table id="tags_table" class="display" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th>DeviceDateTime</th>
+				</tr>
+			</thead>
+ 
+			<tfoot>
+				<tr>
+					<th>DeviceDateTime</th>
+				</tr>
+			</tfoot>
+		</table>
+   
+   </div>
+@EndSection

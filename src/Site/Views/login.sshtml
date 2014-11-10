@@ -1,0 +1,28 @@
+﻿@Master['master.sshtml']
+
+@Section['Title']
+Login
+@EndSection
+
+@Section['Head']
+@EndSection
+
+@Section['Content']
+	<h1>Login</h1>
+	<form id="loginform" action="/login" method="Post">
+		<div class="row">
+			<label for="user">Username</label>
+			<input type="text" id="txtUsername" name="txtUsername"/>
+		</div>
+		<div class="row">
+			<label for="password">Password</label>
+			<input type="password" id="txtPassword" name="txtPassword" />
+		</div>
+		<div class="row">	
+			<input type="button" id="btnLogin" value="Login" OnClick="login()" />
+		</div>
+		<div class="row">	
+			<label id="lblStatus" />
+		</div>
+	</form>
+@EndSection

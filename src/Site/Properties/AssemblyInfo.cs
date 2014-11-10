@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Site")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Amazon.com")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Site")]
-[assembly: AssemblyCopyright("Copyright © Amazon.com 2014")]
+[assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f3161935-90be-415c-b551-965d4a44c3cb")]
+[assembly: Guid("f5a1ef9b-f09f-4091-8696-dd47e042528b")]
 
 // Version information for an assembly consists of the following four values:
 //

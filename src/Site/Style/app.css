@@ -1,0 +1,34 @@
+﻿body {
+}
+
+.ui-menu  
+{
+    position: absolute;
+    width: 150px;
+    top: 50px;
+    padding: 0;
+    border: 0;
+}
+
+a { text-decoration: none;}
+
+.app_header 
+{
+    position: absolute;
+    border: 0;
+    padding: 0;
+    left: 160px;
+    width: 600px;
+    height: 50px;
+}
+
+.app_body 
+{
+    border: 0;
+    padding: 0;
+    position: absolute;
+    top: 50px;
+    left: 160px;
+    width: 600px;
+    height: 400px;
+}

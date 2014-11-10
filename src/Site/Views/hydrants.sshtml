@@ -1,0 +1,13 @@
+﻿@Master['master.sshtml']
+
+@Section['Title']
+Hydrants
+@EndSection
+
+@Section['Head']
+@EndSection
+
+@Section['Content']
+   @Partial['menu.sshtml'];
+   <div class="app_body">Hydrants</div>
+@EndSection

@@ -1,0 +1,12 @@
+﻿<div class="menu_container">
+  <script>
+    $(function() { $( "#menu" ).menu(); });
+  </script>
+  
+  <ul id="menu">
+    <li><a href="/home">Home</a></li>
+	  <li><a href="/mytags">My Tags</a></li>
+	  <li><a href="/hydrants">Hydrants</a></li>
+	  <li><a href="/reviewtags">Review Tags</a></li>
+  </ul>
+</div>
