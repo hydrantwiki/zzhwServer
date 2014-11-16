@@ -1,7 +1,6 @@
 ﻿@Master['master.sshtml']
 
 @Section['Title']
-HydrantWiki
 @EndSection
 
 @Section['Head']
@@ -9,5 +8,5 @@ HydrantWiki
 @EndSection
 
 @Section['Content']
-	@Partial['menu.sshtml'];
+	
 @EndSection

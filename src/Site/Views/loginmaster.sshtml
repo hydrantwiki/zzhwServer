@@ -18,17 +18,14 @@
 	
 	<div class="container" role="main">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-6">
 				<div>
 					<h1>HydrantWiki <small>Crowd-Sourced Open Hydrant Database</small></h1>
 				</div>
 			</div>
 		</div>
 		<div class="row">		
-			<div class="col-md-3">
-				@Partial['menu.sshtml'];
-			</div>
-			<div class="col-md-9">
+			<div class="col-md-6">
 				@Section['Content'];
 			</div>
 		</div>

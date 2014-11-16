@@ -45,6 +45,10 @@ namespace Site.Bootstrapper
             _conventions.StaticContentsConventions.Add(
                 StaticContentConventionBuilder.AddDirectory("js", @"js")
             );
+
+            _conventions.StaticContentsConventions.Add(
+                StaticContentConventionBuilder.AddDirectory("Images", @"images")
+            );
         }
     }
 }

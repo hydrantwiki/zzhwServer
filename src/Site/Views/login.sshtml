@@ -1,4 +1,4 @@
-﻿@Master['master.sshtml']
+﻿@Master['loginmaster.sshtml']
 
 @Section['Title']
 Login
@@ -9,7 +9,7 @@ Login
 
 @Section['Content']
 	<h1>Login</h1>
-	<form id="loginform" action="/login" method="Post">
+	<div id="loginform">
 		<div class="row">
 			<label for="user">Username</label>
 			<input type="text" id="txtUsername" name="txtUsername"/>
@@ -19,10 +19,13 @@ Login
 			<input type="password" id="txtPassword" name="txtPassword" />
 		</div>
 		<div class="row">	
-			<input type="button" id="btnLogin" value="Login" OnClick="login()" />
+			<button id="btnLogin" class="btn btn-primary" OnClick="login()">Login</button>
 		</div>
 		<div class="row">	
 			<label id="lblStatus" />
 		</div>
-	</form>
+		<div class="row">	
+			<a href="/reset">Forgot your password</a>
+		</div>
+	</div>
 @EndSection

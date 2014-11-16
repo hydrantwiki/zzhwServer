@@ -17,6 +17,9 @@ function menuselect(event, ui) {
 function login() {
     var username = $("#txtUsername").val();
     var password = $("#txtPassword").val();
+    
+    $("#lblStatus").removeClass("bg-success");
+    $("#lblStatus").removeClass("bg-danger");
 
     $.ajax({
         type: "POST",
@@ -34,12 +37,15 @@ function login() {
             }
             else if (response.Result == "NotActive") {
                 $("#lblStatus").text("User has been deactivated.");
+                $("#lblStatus").removeClass("bg-danger");
             }
             else if (response.Result == "NotVerified") {
-                $("#lblStatus").text("Please verify your email.");
+                $("#lblStatus").text("Please verify the email address of your account.");
+                $("#lblStatus").removeClass("bg-danger");
             }
             else {
                 $("#lblStatus").text("Bad user or password combination.");
+                $("#lblStatus").removeClass("bg-danger");
             }
         },
         error: LoginFailure,
@@ -49,6 +55,72 @@ function login() {
     });
 }
 
+function ChangePassword() {
+    $("#lblStatus").removeClass("bg-success");
+    $("#lblStatus").removeClass("bg-danger");
+
+    var username = localStorage.userName;
+    var authToken = localStorage.authToken;
+    var current = $("#txtCurrentPassword").val();
+    var new1 = $("#txtNewPassword").val();
+    var new2 = $("#txtNewPasswordRepeat").val();
+
+    if (new1 == new2) {
+        var formData = new FormData();
+        formData.append('currentpassword', current);
+        formData.append('newpassword', new1);
+        
+        $.ajax({
+            type: "POST",
+            url: "/changepassword",
+            headers: { "Username": username, "AuthorizationToken": authToken },
+            data: formData,
+            success: function(response) {
+                if (response.Result == "Success") {
+                    $("#lblStatus").addClass("bg-success");
+                    $("#lblStatus").text("Your password has been changed.");
+                } else {
+                    $("#lblStatus").addClass("bg-danger");
+                    $("#lblStatus").text("Your current password wasn't correct.");
+                }
+            },
+            error: ResetFailure,
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    } else {
+        $("#lblStatus").text("The new passwords do not match.");
+        $("#lblStatus").addClass("bg-danger");
+    }
+
+    
+}
+
+function ResetPassword() {
+    var email = $("#txtEmailAddress").val();
+
+    $.ajax({
+        type: "POST",
+        url: "/reset",
+        headers: { "EmailAddress": email },
+        success: function (response) {
+            if (response.Result == "Success") {
+                alert("If the email is in our system, a password reset email has been sent.");
+
+                window.location.replace("/home");
+            }
+        },
+        error: ResetFailure,
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+}
+
+function ResetFailure() {
+    alert("An error occurred.");
+}
 
 function GetTags() {
     var username = localStorage.userName;
@@ -56,7 +128,7 @@ function GetTags() {
 
     $.ajax({
         type: "GET",
-        url: "/rest/tags",
+        url: "/rest/tags/table",
         headers: { "Username": username, "AuthorizationToken": authToken },
         success: GetTagsReceived,
         error: GetTagsFailure,
@@ -68,10 +140,31 @@ function GetTags() {
 
 function GetTagsReceived(response) {
     $('#tags_table').dataTable({
-        data: response.data,
-        columns: [ { data: 'DeviceDateTime' } ]
-
+        data: response.Data,
+        columns: [{ "data": "TagDateTime", "width" : "20%" } ,
+                  { "data": "Location", "width" : "50%" },
+                  { "data": "Thumbnail", "width" : "30%"} ]
     });
+}
+
+function TagMap(guid) {
+    var url = "/map/tag/" + guid;
+
+    var newwindow = window.open(url, 'name', 'height=300,width=300');
+
+    if (window.focus) {
+        newwindow.focus();
+    }
+    return false;
+}
+
+function PopupWindow(url) {
+    var newwindow = window.open(url, 'name', 'height=200,width=200');
+    
+    if (window.focus) {
+        newwindow.focus();
+    }
+    return false;
 }
 
 function GetTagsFailure() {

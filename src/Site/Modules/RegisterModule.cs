@@ -14,8 +14,19 @@ namespace Site.Modules
             {
                 return View["register.sshtml"];
             };
+
+            Post["/register"] = _parameters =>
+            {
+                Response response = HandleRegister(_parameters);
+                response.ContentType = "application/json";
+                return response;
+            };
         }
 
+        private string HandleRegister(DynamicDictionary _parameters)
+        {
+            return "{ \"Result\":\"Success\"}";
+        }
 
     }
 }

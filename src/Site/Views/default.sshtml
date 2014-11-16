@@ -9,7 +9,6 @@
 	<link rel="stylesheet" href="/Style/app.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
-	@Section['Head'];
 </head>
 <body role="document">
 	@AntiForgeryToken
@@ -18,19 +17,19 @@
 	
 	<div class="container" role="main">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-11">
 				<div>
 					<h1>HydrantWiki <small>Crowd-Sourced Open Hydrant Database</small></h1>
 				</div>
 			</div>
+			<div class="col-md-1">
+				<div>
+					<a href="/login" class="btn btn-primary btn-lg" role="button">Login</a>
+				</div>
+			</div>
 		</div>
 		<div class="row">		
-			<div class="col-md-3">
-				@Partial['menu.sshtml'];
-			</div>
-			<div class="col-md-9">
-				@Section['Content'];
-			</div>
+			
 		</div>
 	</div>
 </body>

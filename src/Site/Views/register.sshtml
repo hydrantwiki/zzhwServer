@@ -1,4 +1,4 @@
-﻿@Master['master.sshtml']
+﻿@Master['loginmaster.sshtml']
 
 @Section['Title']
 Register
@@ -27,7 +27,7 @@ Register
 			<input type="password" id="txtPassword2" name="txtPassword2" />
 		</div>
 		<div class="row">	
-			<input type="submit" id="btnLogin" value="Login" />
+			<button id="btnLogin" class="btn btn-primary" value="Login" OnClick="login()" />
 		</div>
 		<div class="row">	
 			<label id="lblStatus" />

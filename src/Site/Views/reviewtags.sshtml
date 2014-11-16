@@ -8,6 +8,5 @@ Review tags
 @EndSection
 
 @Section['Content']
-   @Partial['menu.sshtml'];
    <div class="app_body">Review Tags</div>
 @EndSection

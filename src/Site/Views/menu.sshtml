@@ -8,5 +8,12 @@
 	  <li><a href="/mytags">My Tags</a></li>
 	  <li><a href="/hydrants">Hydrants</a></li>
 	  <li><a href="/reviewtags">Review Tags</a></li>
+    <li><a href="/downloaddata">Download Hydrant Data</a></li>
+    <li>
+      <a href="/changepassword">Change Password</a>
+    </li>
+    <li>
+      <a href="/logout">Logout</a>
+    </li>
   </ul>
 </div>

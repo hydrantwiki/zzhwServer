@@ -10,7 +10,10 @@ namespace Site.Modules
     {
         public RootModule()
         {
-            Get["/"] = _parameters => "Hello World";
+            Get["/"] = _parameters =>
+            {
+                return View["default.sshtml"];
+            };
         }
     }
 }

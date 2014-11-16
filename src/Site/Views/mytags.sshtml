@@ -10,27 +10,32 @@ My tags
 @EndSection
 
 @Section['Content']
-   @Partial['menu.sshtml'];
    <script>
 		$( document ).ready(function() {
 			GetTags();
 		});
+
+		$(".tagimg").click(function() {
+			alert("Clicked");
+		});
 	</script>
 
    <div class="app_body">
-	   <table id="tags_table" class="display" cellspacing="0" width="100%">
+	   <table id="tags_table" class="stripe" cellspacing="0">
 			<thead>
 				<tr>
-					<th>DeviceDateTime</th>
+					<th>Tag Date Time</th>
+					<th>Location</th>
+					<th>Image</th>
 				</tr>
 			</thead>
- 
 			<tfoot>
 				<tr>
-					<th>DeviceDateTime</th>
+					<th>Tag Date Time</th>
+					<th>Location</th>
+					<th>Image</th>
 				</tr>
 			</tfoot>
 		</table>
-   
    </div>
 @EndSection

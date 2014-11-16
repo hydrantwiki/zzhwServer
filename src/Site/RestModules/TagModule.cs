@@ -4,9 +4,13 @@ using System.Linq;
 using HydrantWiki.Library.Managers;
 using HydrantWiki.Library.Objects;
 using Nancy;
+using Newtonsoft.Json;
 using Site.Helpers;
+using Site.JsonObjects;
+using Site.Objects;
 using TreeGecko.Library.Common.Helpers;
 using TreeGecko.Library.Geospatial.Objects;
+using Tag = HydrantWiki.Library.Objects.Tag;
 
 namespace Site.RestModules
 {
@@ -28,26 +32,33 @@ namespace Site.RestModules
                 return response;
             };
 
-            Get["/rest/tags"] = _parameters =>
+            Get["/rest/tags/table"] = _parameters =>
             {
-                Response response = (Response)HandleGetMyTags(_parameters);
+                Response response = (Response)HandleGetMyTagsInTable(_parameters);
                 response.ContentType = "application/json";
                 return response;
             };
         }
 
-        private string HandleGetMyTags(DynamicDictionary _parameters)
+        private string HandleGetMyTagsInTable(DynamicDictionary _parameters)
         {
             User user;
 
             if (AuthHelper.IsAuthorized(Request, out user))
             {
-                //HydrantWikiManager hwManager = new HydrantWikiManager();
-                //List<Tag> tags = hwManager.GetTagsForUser(user.Guid);
+                HydrantWikiManager hwManager = new HydrantWikiManager();
+                List<Tag> tags = hwManager.GetTagsForUser(user.Guid);
 
-                string json =
-                    "{ \"data\": [ { \"DeviceDateTime\":\"2014-10-01\" }, { \"DeviceDateTime\":\"2014-10-01\" } ] }";
-    
+                TagTableResponse response = new TagTableResponse {Result = "Success"};
+
+                foreach (Tag tag in tags)
+                {
+                    JsonObjects.Tag jTag = new JsonObjects.Tag(tag);
+                    response.Data.Add(jTag);
+                }
+
+                string json = JsonConvert.SerializeObject(response);
+
                 return json;
             }
 
