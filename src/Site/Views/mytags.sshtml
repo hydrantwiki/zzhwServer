@@ -7,6 +7,9 @@ My tags
 @Section['Head']
 	<link rel="stylesheet" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
 	<script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+	<style>
+	  #tags_table { height:400px; width:100% }
+	</style>
 @EndSection
 
 @Section['Content']
@@ -20,22 +23,20 @@ My tags
 		});
 	</script>
 
-   <div class="app_body">
-	   <table id="tags_table" class="stripe" cellspacing="0">
-			<thead>
-				<tr>
-					<th>Tag Date Time</th>
-					<th>Location</th>
-					<th>Image</th>
-				</tr>
-			</thead>
-			<tfoot>
-				<tr>
-					<th>Tag Date Time</th>
-					<th>Location</th>
-					<th>Image</th>
-				</tr>
-			</tfoot>
-		</table>
-   </div>
+    <table id="tags_table" class="stripe" cellspacing="0">
+		<thead>
+			<tr>
+				<th>Tag Date Time</th>
+				<th>Location</th>
+				<th>Image</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th>Tag Date Time</th>
+				<th>Location</th>
+				<th>Image</th>
+			</tr>
+		</tfoot>
+	</table>
 @EndSection

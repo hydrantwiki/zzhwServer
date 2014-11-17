@@ -1,7 +1,7 @@
-﻿@Master['master.sshtml']
+﻿@Master['loginmaster.sshtml']
 
 @Section['Title']
-Login
+Reset your password
 @EndSection
 
 @Section['Head']
@@ -11,14 +11,22 @@ Login
 	<h1>Login</h1>
 	<div id="resetform" >
 		<div class="row">
-			<label for="user">Email Address</label>
-			<input type="text" id="txtEmailAddress" name="txtEmailAddress"/>
+			<div class="col-md-2">
+				<label for="user">Email Address</label>
+			<div>
+			<div class="col-md-3">
+				<input type="text" id="txtEmailAddress" name="txtEmailAddress"/>
+			</div>
 		</div>
 		<div class="row">	
-			<input type="button" id="btnLogin" value="Reset Password" OnClick="ResetPassword()" />
+			<div class="col-md-5">
+				<input type="button" id="btnLogin" value="Reset Password" OnClick="ResetPassword()" />
+			</div>
 		</div>
 		<div class="row">	
-			<label id="lblStatus" />
+			<div class="col-md-5">
+				<label id="lblStatus" />
+			</div>
 		</div>
 	</div>
 @EndSection

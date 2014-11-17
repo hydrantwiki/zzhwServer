@@ -12,7 +12,7 @@ namespace Site.Modules
         public ReviewTagsModule()
         {
             this.RequiresAuthentication();
-            //this.RequiresClaims(new [] { "SuperUser" });
+            this.RequiresClaims(new [] { "SuperUser" });
 
             Get["/reviewtags"] = _parameters =>
             {

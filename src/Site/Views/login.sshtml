@@ -8,24 +8,37 @@ Login
 @EndSection
 
 @Section['Content']
-	<h1>Login</h1>
-	<div id="loginform">
+	<form id="loginform" action="javascript:login();">
 		<div class="row">
-			<label for="user">Username</label>
-			<input type="text" id="txtUsername" name="txtUsername"/>
+			<div class="col-md-2"> 
+				<label for="user">Username</label>
+			</div>
+			<div class="col-md-3">
+				<input type="text" id="txtUsername" name="txtUsername"/>
+			</div>
 		</div>
 		<div class="row">
-			<label for="password">Password</label>
-			<input type="password" id="txtPassword" name="txtPassword" />
+			<div class="col-md-2">
+				<label for="password">Password</label>
+			</div>
+			<div class="col-md-3">
+				<input type="password" id="txtPassword" name="txtPassword" />
+			</div>
 		</div>
 		<div class="row">	
-			<button id="btnLogin" class="btn btn-primary" OnClick="login()">Login</button>
+			<div class="col-md-5">
+				<input type="submit" id="btnLogin" class="btn btn-primary" value="Login"/>
+			</div>
 		</div>
 		<div class="row">	
-			<label id="lblStatus" />
+			<div class="col-md-5">
+				<label id="lblStatus" />
+			</div>
 		</div>
 		<div class="row">	
-			<a href="/reset">Forgot your password</a>
+			<div class="col-md-5">
+				<a href="/reset">Forgot your password</a>
+			</div>
 		</div>
-	</div>
+	</form>
 @EndSection

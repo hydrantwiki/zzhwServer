@@ -1,6 +1,7 @@
 ﻿@Master['master.sshtml']
 
 @Section['Title']
+HydrantWiki Editor Application
 @EndSection
 
 @Section['Head']

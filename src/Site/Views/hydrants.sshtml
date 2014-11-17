@@ -5,8 +5,97 @@ Hydrants
 @EndSection
 
 @Section['Head']
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+<style>
+  #hydrantsMap { height:400px; }
+</style>
 @EndSection
 
 @Section['Content']
-   <div class="app_body">Hydrants</div>
+	<div class="row">
+	   <div class="col-md-9" id="hydrantsMap"> 
+	   </div>
+	   <div class="col-md-3" id="hydrantDetails">
+	   </div>
+	</div>
+   <script type="text/javascript">
+        var map;
+        var layerHeatMap;
+        var layerBackground;
+        var markerLayer;
+        
+        $( document ).ready(function() {
+			setupMap();
+		});
+
+        function hydrantDetailsReceived(response) {
+            $('#hydrantDetails').html(response);
+        }
+
+        function dataReceived(data) {
+            if (markerLayer) {
+                 map.removeLayer(markerLayer);
+            }
+               
+			markerLayer = omnivore.csv.parse(data).addTo(map);
+
+			markerLayer.on('click', function(e) {
+				$('#hydrantDetails').empty();
+
+				e.layer.closePopup();
+
+				var postURL = "/rest/hydrant/" + e.layer.feature.properties['id'];
+
+                $.ajax({
+                    url: postURL,
+                    beforeSend: function (xhr) {
+                        xhr.overrideMimeType("text/html; charset=x-user-defined");
+                    }
+                }).done(hydrantDetailsReceived);
+			});
+
+			$('#hydrantDetails').empty();
+        }
+
+        function mapRefresh() {
+            var zoomLevel = map.getZoom();
+
+            if (zoomLevel > 12) {
+                var currentExtent = map.getBounds();
+
+                var postURL = "/rest/hydrants/csv/" + currentExtent.getEast() +"/"
+				 + currentExtent.getWest() + "/" + currentExtent.getNorth() + "/" + currentExtent.getSouth();
+
+                $.ajax({
+                    url: postURL,
+                    beforeSend: function (xhr) {
+                        xhr.overrideMimeType("text/plain; charset=x-user-defined");
+                    }
+                }).done(dataReceived);
+            }
+            else {
+                if (markerLayer) {
+                    map.removeLayer(markerLayer);
+                }
+            }
+        }
+
+        function zoomedCallback(map, zoomOffset) {
+            mapRefresh();
+        }
+
+        function pannedCallback(map, panOffset) {
+            mapRefresh();
+        }
+
+        function setupMap() {
+			L.mapbox.accessToken = 'pk.eyJ1IjoiYmVuZ2Vja28iLCJhIjoiWWZUV19DWSJ9.tZeFW6lO74I48ZC24-bB2w';
+			map = L.mapbox.map('hydrantsMap', 'bengecko.k87e169i').setView([40.26, -96.870], 3);
+
+            map.on("zoomend", zoomedCallback);
+            map.on("moveend", pannedCallback);
+        }
+    </script>
 @EndSection
