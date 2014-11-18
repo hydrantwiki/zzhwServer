@@ -9,5 +9,5 @@ HydrantWiki Editor Application
 @EndSection
 
 @Section['Content']
-	
+	@Context.CurrentUser.IsSuperUser
 @EndSection

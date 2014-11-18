@@ -21,6 +21,22 @@ namespace Site.Objects
 
         public string UserName { get; set; }
 
+        public bool IsAdmin
+        {
+            get
+            {
+                return m_Claims.Contains("Admin");
+            }
+        }
+
+        public bool IsSuperUser
+        {
+            get
+            {
+                return m_Claims.Contains("SuperUser");
+            }
+        }
+
         public void SetClaims(UserTypes _userTypes)
         {
             switch (_userTypes)

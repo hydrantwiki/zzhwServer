@@ -16,7 +16,7 @@ namespace Site.Modules
         public AppModule()
         {
             this.RequiresAuthentication();
-
+           
             Get["/home"] = _parameters =>
             {
                 return View["home.sshtml"];
@@ -52,6 +52,20 @@ namespace Site.Modules
             Get["/map/tag/{Guid}"] = _parameters =>
             {
                 return GetTagMap(_parameters);
+            };
+
+
+            Get["/reviewtags"] = _parameters =>
+            {
+                if (Context.CurrentUser.HasClaim("SuperUser")
+                    || Context.CurrentUser.HasClaim("SuperUser"))
+                {
+                    return View["reviewtags.sshtml"];
+                }
+                else
+                {
+                    return View["home.sshtml"];
+                }
             };
         }
 

@@ -118,7 +118,6 @@
     <Compile Include="Helpers\UserMapper.cs" />
     <Compile Include="JsonObjects\Tag.cs" />
     <Compile Include="JsonObjects\TagTableResponse.cs" />
-    <Compile Include="Modules\ReviewTagsModule.cs" />
     <Compile Include="Modules\RootModule.cs" />
     <Compile Include="Modules\AppModule.cs" />
     <Compile Include="Modules\LoginModule.cs" />
