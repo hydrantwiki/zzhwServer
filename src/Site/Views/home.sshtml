@@ -1,7 +1,7 @@
 ﻿@Master['master.sshtml']
 
 @Section['Title']
-HydrantWiki Editor Application
+HydrantWiki Review Application
 @EndSection
 
 @Section['Head']
@@ -9,5 +9,6 @@ HydrantWiki Editor Application
 @EndSection
 
 @Section['Content']
-	@Context.CurrentUser.IsSuperUser
+<p>This application is designed to allow users to review the tags that they have collected over time.</p>
+<p>Users can also view the Hydrants that have been collected by the HydrantWiki (and beyond) community.</p>
 @EndSection

@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Site.Helpers;
 using Site.JsonObjects;
 using Site.Objects;
+using TreeGecko.Library.Common.Enums;
 using TreeGecko.Library.Common.Helpers;
 using TreeGecko.Library.Geospatial.Objects;
 using Tag = HydrantWiki.Library.Objects.Tag;
@@ -32,9 +33,16 @@ namespace Site.RestModules
                 return response;
             };
 
-            Get["/rest/tags/table"] = _parameters =>
+            Get["/rest/tags/mine/table"] = _parameters =>
             {
                 Response response = (Response)HandleGetMyTagsInTable(_parameters);
+                response.ContentType = "application/json";
+                return response;
+            };
+
+            Get["/rest/tags/pending/table"] = _parameters =>
+            {
+                Response response = (Response)HandleGetPendingTagsInTable(_parameters);
                 response.ContentType = "application/json";
                 return response;
             };
@@ -60,6 +68,35 @@ namespace Site.RestModules
                 string json = JsonConvert.SerializeObject(response);
 
                 return json;
+            }
+
+            return null;
+        }
+
+        private string HandleGetPendingTagsInTable(DynamicDictionary _parameters)
+        {
+            User user;
+
+            if (AuthHelper.IsAuthorized(Request, out user))
+            {
+                if (user.UserType == UserTypes.SuperUser
+                    || user.UserType == UserTypes.Administrator)
+                {
+                    HydrantWikiManager hwManager = new HydrantWikiManager();
+                    List<Tag> tags = hwManager.GetPendingTags();
+
+                    TagTableResponse response = new TagTableResponse {Result = "Success"};
+
+                    foreach (Tag tag in tags)
+                    {
+                        JsonObjects.Tag jTag = new JsonObjects.Tag(tag);
+                        response.Data.Add(jTag);
+                    }
+
+                    string json = JsonConvert.SerializeObject(response);
+
+                    return json;
+                }
             }
 
             return null;

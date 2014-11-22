@@ -5,8 +5,38 @@ Review tags
 @EndSection
 
 @Section['Head']
+	<link rel="stylesheet" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
+	<script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+	<style>
+	  #tags_table { min-height:400px; width:100% }
+	</style>
 @EndSection
 
 @Section['Content']
-This is a test.
+  <script>
+		$( document ).ready(function() {
+			GetPendingTags();
+		});
+
+		$(".tagimg").click(function() {
+			
+		});
+	</script>
+
+    <table id="tags_table" class="stripe" cellspacing="0">
+		<thead>
+			<tr>
+				<th>Tag Date Time</th>
+				<th>Location</th>
+				<th>Image</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th>Tag Date Time</th>
+				<th>Location</th>
+				<th>Image</th>
+			</tr>
+		</tfoot>
+	</table>
 @EndSection

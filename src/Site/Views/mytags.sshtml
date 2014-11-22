@@ -8,18 +8,18 @@ My tags
 	<link rel="stylesheet" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
 	<script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
 	<style>
-	  #tags_table { height:400px; width:100% }
+	  #tags_table { min-height:400px; width:100% }
 	</style>
 @EndSection
 
 @Section['Content']
    <script>
 		$( document ).ready(function() {
-			GetTags();
+			GetMyTags();
 		});
 
 		$(".tagimg").click(function() {
-			alert("Clicked");
+			
 		});
 	</script>
 

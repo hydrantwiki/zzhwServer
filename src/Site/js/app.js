@@ -122,13 +122,42 @@ function ResetFailure() {
     alert("An error occurred.");
 }
 
-function GetTags() {
+function GetPendingTags() {
     var username = localStorage.userName;
     var authToken = localStorage.authToken;
 
     $.ajax({
         type: "GET",
-        url: "/rest/tags/table",
+        url: "/rest/tags/pending/table",
+        headers: { "Username": username, "AuthorizationToken": authToken },
+        success: GetPendingTagsReceived,
+        error: GetPendingTagsFailure,
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+}
+
+function GetPendingTagsFailure() {
+    
+}
+
+function GetPendingTagsReceived(response) {
+    $('#tags_table').dataTable({
+        data: response.Data,
+        columns: [{ "data": "TagDateTime", "width": "20%" },
+                  { "data": "Location", "width": "50%" },
+                  { "data": "Thumbnail", "width": "30%"}]
+    });
+}
+
+function GetMyTags() {
+    var username = localStorage.userName;
+    var authToken = localStorage.authToken;
+
+    $.ajax({
+        type: "GET",
+        url: "/rest/tags/mine/table",
         headers: { "Username": username, "AuthorizationToken": authToken },
         success: GetTagsReceived,
         error: GetTagsFailure,
@@ -150,7 +179,10 @@ function GetTagsReceived(response) {
 function TagMap(guid) {
     var url = "/map/tag/" + guid;
 
-    var newwindow = window.open(url, 'name', 'height=300,width=300');
+    /* TODO - Make this more of a jquery ui type dialog rather than a new window */
+    /* should be able to pull down the content of the url and stick it in the div in the window */
+
+    var newwindow = window.open(url, 'name', 'height=300, width=300, toolbar=no, scrollbars=no, resizable=no, location=no, status=no');
 
     if (window.focus) {
         newwindow.focus();
