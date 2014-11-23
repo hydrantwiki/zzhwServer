@@ -116,6 +116,7 @@
     <Compile Include="Extensions\RequestBodyExtension.cs" />
     <Compile Include="Helpers\AuthHelper.cs" />
     <Compile Include="Helpers\UserMapper.cs" />
+    <Compile Include="JsonObjects\NearbyHydrantTableResponse.cs" />
     <Compile Include="JsonObjects\ReviewTag.cs" />
     <Compile Include="JsonObjects\Tag.cs" />
     <Compile Include="JsonObjects\TagTableResponse.cs" />

@@ -6,7 +6,10 @@ using HydrantWiki.Library.Helpers;
 using HydrantWiki.Library.Managers;
 using HydrantWiki.Library.Objects;
 using Nancy;
+using Newtonsoft.Json;
+using Site.JsonObjects;
 using TreeGecko.Library.Geospatial.Objects;
+using Tag = HydrantWiki.Library.Objects.Tag;
 
 namespace Site.RestModules
 {
@@ -16,13 +19,60 @@ namespace Site.RestModules
         {
             Get["/rest/hydrants/csv/{east}/{west}/{north}/{south}"] = _parameters =>
             {
-                Response response = GetCSVData(_parameters);
+                Response response = GetGeoboxCSVData(_parameters);
                 response.ContentType = "text/csv";
+                return response;
+            };
+
+            Get["/rest/nearbyhydrants/csv/{latitude}/{longitude}/{distance}"] = _parameters =>
+            {
+                Response response = GetCenterRadiusCSVData(_parameters);
+                response.ContentType = "text/csv";
+                return response;
+            };
+
+            Get["/rest/nearbyhydrants/table/{latitude}/{longitude}/{distance}"] = _parameters =>
+            {
+                Response response = GetCenterRadiusCSVData(_parameters);
+                response.ContentType = "application/json";
                 return response;
             };
         }
 
-        public string GetCSVData(DynamicDictionary _parameters)
+        public string GetCenterRadiusJsonData(DynamicDictionary _parameters)
+        {
+            HydrantWikiManager hwm = new HydrantWikiManager();
+
+            double latitude = Convert.ToDouble((string)_parameters["latitude"]);
+            double longitude = Convert.ToDouble((string)_parameters["longitude"]);
+            double distance = Convert.ToDouble((string)_parameters["distance"]);
+
+            GeoPoint point = new GeoPoint(longitude, latitude);
+
+            List<NearbyHydrant> hydrants = hwm.GetNearbyHydrants(point, distance);
+            NearbyHydrantTableResponse response = new NearbyHydrantTableResponse { Result = "Success" };
+            response.Data = hydrants;
+            
+            string json = JsonConvert.SerializeObject(response);
+
+            return json;
+        }
+
+        public string GetCenterRadiusCSVData(DynamicDictionary _parameters)
+        {
+            HydrantWikiManager hwm = new HydrantWikiManager();
+
+            double latitude = Convert.ToDouble((string)_parameters["latitude"]);
+            double longitude = Convert.ToDouble((string)_parameters["longitude"]);
+            double distance = Convert.ToDouble((string)_parameters["distance"]);
+
+            GeoPoint point = new GeoPoint(longitude, latitude);
+
+            List<NearbyHydrant> hydrants = hwm.GetNearbyHydrants(point, distance);
+            return HydrantCSVHelper.GetHydrantCSV(hydrants);
+        }
+
+        public string GetGeoboxCSVData(DynamicDictionary _parameters)
         {
             HydrantWikiManager hwm = new HydrantWikiManager();
          

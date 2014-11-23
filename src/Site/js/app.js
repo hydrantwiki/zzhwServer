@@ -152,6 +152,10 @@ function GetPendingTagsReceived(response) {
     });
 }
 
+function GetNearbyHydrants(tagGuid) {
+    
+}
+
 function GetMyTags() {
     var username = localStorage.userName;
     var authToken = localStorage.authToken;

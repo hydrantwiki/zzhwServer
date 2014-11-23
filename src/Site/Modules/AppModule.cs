@@ -71,9 +71,23 @@ namespace Site.Modules
             Get["/reviewtag/{Guid}"] = _parameters =>
             {
                 if (Context.CurrentUser.HasClaim("SuperUser")
-                    || Context.CurrentUser.HasClaim("SuperUser"))
+                    || Context.CurrentUser.HasClaim("Admin"))
                 {
-                    return View["reviewtag.sshtml"];
+                    if (_parameters != null
+                        && _parameters.ContainsKey("Guid")
+                        && GuidHelper.IsValidGuidString(_parameters["Guid"]))
+                    {
+                        Guid tagGuid = new Guid(_parameters["Guid"]);
+
+                        HydrantWikiManager hwm = new HydrantWikiManager();
+                        Tag tag = hwm.GetTag(tagGuid);
+
+                        if (tag != null)
+                        {
+                            return View["reviewtag.sshtml", tag];
+                        }
+                    }
+                    return null;
                 }
                 else
                 {

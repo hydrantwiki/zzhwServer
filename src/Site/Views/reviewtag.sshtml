@@ -5,9 +5,96 @@ Review Tag
 @EndSection
 
 @Section['Head']
-
+	<link rel="stylesheet" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
+	<script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+	<style>
+	  #tags_table { min-height:200px; width:100% }
+	</style>
 @EndSection
 
 @Section['Content']
+<script type="text/javascript">
+    var map;
+    var layer;
+    var markerLayer;
+
+    var panorama;
+
+    $(document).ready(function () {
+		GetNearbyHydrants('@Model.Guid');     
+    });
+
+    function refreshMap() {
+        var latitude = $('#hidLatitude').val();
+        var longitude = $('#hidLongitude').val();
+        var csv = $('#hidNearbyPointsCSV').val();
+
+        map = mapbox.map('mapBody');
+        layer = mapbox.layer().id('bengecko.map-vqbbmhmw');
+        map.addLayer(layer);
+
+        markerLayer = mapbox.markers.layer();
+        map.addLayer(markerLayer);
+
+        if (csv) {
+            markerLayer.csv(csv);
+        }
+
+        var newFeature = { geometry: { coordinates: [longitude, latitude] }, properties: {} };
+        markerLayer.add_feature(newFeature);
+
+        map.centerzoom({ lat: latitude, lon: longitude }, 20, false);
+
+        var newCenter = new google.maps.LatLng(latitude, longitude);
+
+        var panoramaOptions = {
+            position: newCenter,
+            pov: {
+                heading: 0,
+                pitch: 10
+            }
+        };
+        panorama = new google.maps.StreetViewPanorama(document.getElementById('panoBody'), panoramaOptions);
+                    
+    }
+</script>
+<div class="row">
+	<div class="md-col-8">
+		<h4>Nearby Hydrants
+		<table id="hydrants_table" class="stripe" cellspacing="0">
+			<thead>
+				<tr>
+					<th>Location</th>
+					<th>Distance (ft)</th>
+					<th>Image</th>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<th>Location</th>
+					<th>Distance (ft)</th>
+					<th>Image</th>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	<div class="md-col-4">
+		<img src="@Model.GetUrl(True)" class="tagimg" >
+	</div>
+</div>
+<div class="row">
+	<div class="md-col-6">
+		<div class="mapBody" id="mapBody"></div>
+	</div>
+	<div class="md-col-6">
+		<div class="panoBody" id="panoBody"></div>
+	</div>
+</div>
+<div class="row">
+	<div class="md-col-12">
+		<button type="button" class="btn btn-info" onclick="AcceptTag('@Model.Guid')">Accept</button>
+		<button type="button" class="btn btn-info" onclick="RejectTag('@Model.Guid')">Reject</button>
+	</div>
+</div>
 
 @EndSection
