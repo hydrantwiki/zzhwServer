@@ -1,0 +1,13 @@
+﻿@Master['master.sshtml']
+
+@Section['Title']
+Review Tag
+@EndSection
+
+@Section['Head']
+
+@EndSection
+
+@Section['Content']
+
+@EndSection

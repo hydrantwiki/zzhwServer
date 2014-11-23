@@ -89,8 +89,8 @@ namespace Site.RestModules
 
                     foreach (Tag tag in tags)
                     {
-                        JsonObjects.Tag jTag = new JsonObjects.Tag(tag);
-                        response.Data.Add(jTag);
+                        JsonObjects.ReviewTag jReviewTag = new JsonObjects.ReviewTag(tag);
+                        response.Data.Add(jReviewTag);
                     }
 
                     string json = JsonConvert.SerializeObject(response);

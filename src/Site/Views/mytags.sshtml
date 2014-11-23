@@ -17,10 +17,6 @@ My tags
 		$( document ).ready(function() {
 			GetMyTags();
 		});
-
-		$(".tagimg").click(function() {
-			
-		});
 	</script>
 
     <table id="tags_table" class="stripe" cellspacing="0">

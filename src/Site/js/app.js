@@ -145,8 +145,9 @@ function GetPendingTagsFailure() {
 function GetPendingTagsReceived(response) {
     $('#tags_table').dataTable({
         data: response.Data,
-        columns: [{ "data": "TagDateTime", "width": "20%" },
-                  { "data": "Location", "width": "50%" },
+        columns: [{ "data": "ReviewButton", "width": "10%" },
+                  { "data": "TagDateTime", "width": "20%" },
+                  { "data": "Location", "width": "40%" },
                   { "data": "Thumbnail", "width": "30%"}]
     });
 }
@@ -174,6 +175,15 @@ function GetTagsReceived(response) {
                   { "data": "Location", "width" : "50%" },
                   { "data": "Thumbnail", "width" : "30%"} ]
     });
+}
+
+function ShowImage(url) {
+    var newwindow = window.open(url, 'name', 'height=500, width=500, toolbar=no, scrollbars=no, resizable=no, location=no, status=no');
+
+    if (window.focus) {
+        newwindow.focus();
+    }
+    return false;
 }
 
 function TagMap(guid) {

@@ -67,6 +67,19 @@ namespace Site.Modules
                     return View["home.sshtml"];
                 }
             };
+
+            Get["/reviewtag/{Guid}"] = _parameters =>
+            {
+                if (Context.CurrentUser.HasClaim("SuperUser")
+                    || Context.CurrentUser.HasClaim("SuperUser"))
+                {
+                    return View["reviewtag.sshtml"];
+                }
+                else
+                {
+                    return View["home.sshtml"];
+                }
+            };
         }
 
         private string HandleChangePassword(DynamicDictionary _parameters)

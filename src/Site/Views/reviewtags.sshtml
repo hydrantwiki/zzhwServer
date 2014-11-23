@@ -17,15 +17,12 @@ Review tags
 		$( document ).ready(function() {
 			GetPendingTags();
 		});
-
-		$(".tagimg").click(function() {
-			
-		});
 	</script>
 
     <table id="tags_table" class="stripe" cellspacing="0">
 		<thead>
 			<tr>
+				<th>Action</th>
 				<th>Tag Date Time</th>
 				<th>Location</th>
 				<th>Image</th>
@@ -33,6 +30,7 @@ Review tags
 		</thead>
 		<tfoot>
 			<tr>
+				<th>Action</th>
 				<th>Tag Date Time</th>
 				<th>Location</th>
 				<th>Image</th>

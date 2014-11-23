@@ -116,6 +116,7 @@
     <Compile Include="Extensions\RequestBodyExtension.cs" />
     <Compile Include="Helpers\AuthHelper.cs" />
     <Compile Include="Helpers\UserMapper.cs" />
+    <Compile Include="JsonObjects\ReviewTag.cs" />
     <Compile Include="JsonObjects\Tag.cs" />
     <Compile Include="JsonObjects\TagTableResponse.cs" />
     <Compile Include="Modules\RootModule.cs" />
@@ -142,6 +143,7 @@
     <None Include="Views\popupmap.sshtml" />
     <None Include="Views\register.sshtml" />
     <None Include="Views\reset.sshtml" />
+    <None Include="Views\reviewtag.sshtml" />
     <None Include="Views\reviewtags.sshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
