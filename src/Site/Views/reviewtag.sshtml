@@ -9,43 +9,33 @@ Review Tag
 	<script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
 	<style>
 	  #tags_table { min-height:200px; width:100% }
+	  #mapBody {  }
 	</style>
+	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
+	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet' />
+	<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=abc&sensor=false"></script>
 @EndSection
 
 @Section['Content']
 <script type="text/javascript">
-    var map;
-    var layer;
-    var markerLayer;
-
+	var map;
+	var layerHeatMap;
+	var layerBackground;
+	var markerLayer;
     var panorama;
 
     $(document).ready(function () {
-		GetNearbyHydrants('@Model.Guid');     
+		GetNearbyHydrants('@Model.Guid');   
+
+		setupMap();
+		GetNearbyHydrantsForMap('@Model.Guid');
+
+		setupStreetView();
     });
 
-    function refreshMap() {
-        var latitude = $('#hidLatitude').val();
-        var longitude = $('#hidLongitude').val();
-        var csv = $('#hidNearbyPointsCSV').val();
-
-        map = mapbox.map('mapBody');
-        layer = mapbox.layer().id('bengecko.map-vqbbmhmw');
-        map.addLayer(layer);
-
-        markerLayer = mapbox.markers.layer();
-        map.addLayer(markerLayer);
-
-        if (csv) {
-            markerLayer.csv(csv);
-        }
-
-        var newFeature = { geometry: { coordinates: [longitude, latitude] }, properties: {} };
-        markerLayer.add_feature(newFeature);
-
-        map.centerzoom({ lat: latitude, lon: longitude }, 20, false);
-
-        var newCenter = new google.maps.LatLng(latitude, longitude);
+    function setupStreetView() {
+        var newCenter = new google.maps.LatLng(@Model.Position.Y, @Model.Position.X);
 
         var panoramaOptions = {
             position: newCenter,
@@ -54,40 +44,46 @@ Review Tag
                 pitch: 10
             }
         };
-        panorama = new google.maps.StreetViewPanorama(document.getElementById('panoBody'), panoramaOptions);
-                    
+
+        panorama = new google.maps.StreetViewPanorama(document.getElementById('panoBody'), panoramaOptions);      
+    }
+
+    function setupMap() {
+		L.mapbox.accessToken = 'pk.eyJ1IjoiYmVuZ2Vja28iLCJhIjoiWWZUV19DWSJ9.tZeFW6lO74I48ZC24-bB2w';
+		map = L.mapbox.map('mapNearbyHydrants', 'bengecko.map-vqbbmhmw').setView([40.26, -96.870], 3);
     }
 </script>
+<input type="hidden" id="hidTagGuid" name="hidTagGuid" value="@Model.Guid">
 <div class="row">
-	<div class="md-col-8">
-		<h4>Nearby Hydrants
+	<div class="col-md-8">
+		<h4>Nearby Hydrants</h4>
 		<table id="hydrants_table" class="stripe" cellspacing="0">
 			<thead>
 				<tr>
-					<th>Location</th>
+					<th>Action</th>
 					<th>Distance (ft)</th>
+					<th>Location</th>
 					<th>Image</th>
 				</tr>
 			</thead>
 			<tfoot>
 				<tr>
-					<th>Location</th>
+					<th>Action</th>
 					<th>Distance (ft)</th>
+					<th>Location</th>
 					<th>Image</th>
 				</tr>
 			</tfoot>
 		</table>
 	</div>
-	<div class="md-col-4">
-		<img src="@Model.GetUrl(True)" class="tagimg" >
+	<div class="col-md-4">
+		<img src="@Model.ImageUrl" style="max-width:100%;max-height:100%;" >
 	</div>
 </div>
-<div class="row">
-	<div class="md-col-6">
-		<div class="mapBody" id="mapBody"></div>
+<div class="row mapRow">
+	<div class="col-md-6 mapNearbyHydrants" id="mapNearbyHydrants">
 	</div>
-	<div class="md-col-6">
-		<div class="panoBody" id="panoBody"></div>
+	<div class="col-md-6 panoBody" id="panoBody">
 	</div>
 </div>
 <div class="row">

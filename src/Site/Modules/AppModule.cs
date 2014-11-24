@@ -58,7 +58,7 @@ namespace Site.Modules
             Get["/reviewtags"] = _parameters =>
             {
                 if (Context.CurrentUser.HasClaim("SuperUser")
-                    || Context.CurrentUser.HasClaim("SuperUser"))
+                    || Context.CurrentUser.HasClaim("Admin"))
                 {
                     return View["reviewtags.sshtml"];
                 }

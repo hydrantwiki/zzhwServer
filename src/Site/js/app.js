@@ -153,8 +153,61 @@ function GetPendingTagsReceived(response) {
 }
 
 function GetNearbyHydrants(tagGuid) {
+    var username = localStorage.userName;
+    var authToken = localStorage.authToken;
+
+    $.ajax({
+        type: "GET",
+        url: "/rest/nearbyhydrantsbytag/table/" + tagGuid,
+        headers: { "Username": username, "AuthorizationToken": authToken },
+        success: GetNearbyHydrantsReceived,
+        error: GetNearbyHydrantsFailure,
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+}
+
+function GetNearbyHydrantsFailure() {
+
+}
+
+function GetNearbyHydrantsReceived(response) {
+    $('#hydrants_table').dataTable({
+        data: response.Data,
+        columns: [{ "data": "MatchButton", "width": "20%" },
+                  { "data": "DistanceInFeet", "width": "20%" },
+                  { "data": "Location", "width": "30%" },
+                  { "data": "Thumbnail", "width": "30%"}]
+    });
+}
+
+function GetNearbyHydrantsForMap(tagGuid) {
+    var username = localStorage.userName;
+    var authToken = localStorage.authToken;
+
+    $.ajax({
+        type: "GET",
+        url: "/rest/nearbyhydrantsbytag/csv/" + tagGuid,
+        headers: { "Username": username, "AuthorizationToken": authToken },
+        success: GetNearbyHydrantsForMapReceived,
+        error: GetNearbyHydrantsForMapFailure,
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+}
+
+function GetNearbyHydrantsForMapReceived(data) {
+    markerLayer = omnivore.csv.parse(data, null, L.mapbox.featureLayer()).addTo(map);
+    map.fitBounds(markerLayer.getBounds());
+}
+
+function GetNearbyHydrantsForMapFailure(response) {
     
 }
+
+
 
 function GetMyTags() {
     var username = localStorage.userName;
