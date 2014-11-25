@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using HydrantWiki.Library.Constants;
 using HydrantWiki.Library.Managers;
 using HydrantWiki.Library.Objects;
 using Nancy;
 using Newtonsoft.Json;
 using Site.Helpers;
 using Site.JsonObjects;
-using Site.Objects;
 using TreeGecko.Library.Common.Enums;
-using TreeGecko.Library.Common.Helpers;
 using TreeGecko.Library.Geospatial.Objects;
 using Tag = HydrantWiki.Library.Objects.Tag;
 
@@ -46,6 +45,169 @@ namespace Site.RestModules
                 response.ContentType = "application/json";
                 return response;
             };
+
+            Post["/rest/tag/match/{tagGuid}/{hydrantGuid}"] = _parameters =>
+            {
+                Response response = (Response)MatchTagWithHydrant(_parameters);
+                response.ContentType = "application/json";
+                return response;
+            };
+
+            Post["/rest/tag/reject/{tagGuid}"] = _parameters =>
+            {
+                Response response = (Response)RejectTag(_parameters);
+                response.ContentType = "application/json";
+                return response;
+            };
+
+            Post["/rest/tag/accept/{tagGuid}"] = _parameters =>
+            {
+                Response response = (Response)AcceptTag(_parameters);
+                response.ContentType = "application/json";
+                return response;
+            };
+        }
+
+        private string RejectTag(DynamicDictionary _parameters)
+        {
+            User user;
+
+            if (AuthHelper.IsAuthorized(Request, out user))
+            {
+                if (user != null
+                    && (user.UserType == UserTypes.SuperUser
+                        || user.UserType == UserTypes.Administrator))
+                {
+                    HydrantWikiManager hwManager = new HydrantWikiManager();
+
+                    string sTagGuid = _parameters["tagGuid"];
+                    Guid tagGuid;
+
+                    if (Guid.TryParse(sTagGuid, out tagGuid))
+                    {
+                        Tag tag = hwManager.GetTag(tagGuid);
+
+                        if (tag != null)
+                        {
+                            if (tag.Status == TagStatus.Pending)
+                            {
+                                tag.Status = TagStatus.Rejected;
+                                hwManager.Persist(tag);
+
+                                return @"{ ""Result"":""Success"" }";
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            return @"{ ""Result"":""Failure"" }";
+        }
+
+        private string MatchTagWithHydrant(DynamicDictionary _parameters)
+        {
+            User user;
+
+            if (AuthHelper.IsAuthorized(Request, out user))
+            {
+                if (user != null
+                    && (user.UserType == UserTypes.SuperUser
+                        || user.UserType == UserTypes.Administrator))
+                {
+                    HydrantWikiManager hwManager = new HydrantWikiManager();
+
+                    string sTagGuid = _parameters["tagGuid"];
+                    Guid tagGuid;
+
+                    if (Guid.TryParse(sTagGuid, out tagGuid))
+                    {
+                        Tag tag = hwManager.GetTag(tagGuid);
+
+                        if (tag != null)
+                        {
+                            if (tag.Status == TagStatus.Pending)
+                            {
+                                string sHydrantGuid = _parameters["hydrantGuid"];
+                                Guid hydrantGuid;
+
+                                if (Guid.TryParse(sHydrantGuid, out hydrantGuid))
+                                {
+                                    Hydrant hydrant = hwManager.GetHydrant(hydrantGuid);
+
+                                    if (hydrant != null)
+                                    {
+                                        tag.Status = TagStatus.Approved;
+                                        tag.HydrantGuid = hydrantGuid;
+                                        hwManager.Persist(tag);
+
+                                        //TODO - Probably need to reaverage all tag positions and assign back to hydrant
+                                        hydrant.LastReviewerUserGuid = user.Guid;
+                                        hwManager.Persist(hydrant);
+
+                                        return @"{ ""Result"":""Success"" }";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return @"{ ""Result"":""Failure"" }";
+        }
+
+        private string AcceptTag(DynamicDictionary _parameters)
+        {
+            User user;
+
+            if (AuthHelper.IsAuthorized(Request, out user))
+            {
+                if (user != null
+                    && (user.UserType == UserTypes.SuperUser
+                        || user.UserType == UserTypes.Administrator))
+                {
+                    HydrantWikiManager hwManager = new HydrantWikiManager();
+
+                    string sTagGuid = _parameters["tagGuid"];
+                    Guid tagGuid;
+
+                    if (Guid.TryParse(sTagGuid, out tagGuid))
+                    {
+                        Tag tag = hwManager.GetTag(tagGuid);
+
+                        if (tag != null)
+                        {
+                            if (tag.Status == TagStatus.Pending)
+                            {
+                                Hydrant hydrant = new Hydrant
+                                {
+                                    Active = true,
+                                    CreationDateTime = tag.DeviceDateTime,
+                                    LastModifiedBy = tag.LastModifiedBy,
+                                    LastModifiedDateTime = tag.LastModifiedDateTime,
+                                    LastReviewerUserGuid = user.Guid,
+                                    OriginalReviewerUserGuid = user.Guid,
+                                    OriginalTagDateTime = tag.DeviceDateTime,
+                                    OriginalTagUserGuid = tag.UserGuid,
+                                    Position = tag.Position,
+                                    PrimaryImageGuid = tag.ImageGuid
+                                };
+
+                                hwManager.Persist(hydrant);
+
+                                tag.Status = TagStatus.Approved;
+                                tag.HydrantGuid = hydrant.Guid;
+                                hwManager.Persist(tag);
+
+                                return @"{ ""Result"":""Success"" }";
+                            }
+                        }
+                    }
+                }
+            }
+
+            return @"{ ""Result"":""Failure"" }";
         }
 
         private string HandleGetMyTagsInTable(DynamicDictionary _parameters)

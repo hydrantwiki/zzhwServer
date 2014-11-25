@@ -207,6 +207,91 @@ function GetNearbyHydrantsForMapFailure(response) {
     
 }
 
+function MatchHydrant(hydrantGuid) {
+    var tagGuid = $("#hidTagGuid").val();
+
+    var username = localStorage.userName;
+    var authToken = localStorage.authToken;
+
+    $.ajax({
+        type: "POST",
+        url: "/rest/tag/match/" + tagGuid + "/" + hydrantGuid,
+        headers: { "Username": username, "AuthorizationToken": authToken },
+        success: MatchHydrantSuccess,
+        error: MatchHydrantFailure,
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+}
+
+function MatchHydrantSuccess(response) {
+    if (response.Result == "Success") {
+        window.location.replace("/reviewtags");
+    } else {
+        alert("Unable to match tag");
+    }
+}
+
+function MatchHydrantFailure(response) {
+    alert("Error matching tag");
+}
+
+function AcceptTag(tagGuid) {
+    var username = localStorage.userName;
+    var authToken = localStorage.authToken;
+
+    $.ajax({
+        type: "POST",
+        url: "/rest/tag/accept/" + tagGuid,
+        headers: { "Username": username, "AuthorizationToken": authToken },
+        success: AcceptTagSuccess,
+        error: AcceptTagFailure,
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+}
+
+function AcceptTagSuccess(response) {
+    if (response.Result == "Success") {
+        window.location.replace("/reviewtags");
+    } else {
+        alert("Unable to accept tag");
+    }
+}
+
+function AcceptTagFailure(response) {
+    alert("Error accepting tag");
+}
+
+function RejectTag(tagGuid) {
+    var username = localStorage.userName;
+    var authToken = localStorage.authToken;
+
+    $.ajax({
+        type: "POST",
+        url: "/rest/tag/reject/" + tagGuid,
+        headers: { "Username": username, "AuthorizationToken": authToken },
+        success: RejectTagSuccess,
+        error: RejectTagFailure,
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+}
+
+function RejectTagSuccess(response) {
+    if (response.Result == "Success") {
+        window.location.replace("/reviewtags");
+    } else {
+        alert("Unable to reject tag");
+    }
+}
+
+function RejectTagFailure(response) {
+    alert("Error rejecting tag");
+}
 
 
 function GetMyTags() {
