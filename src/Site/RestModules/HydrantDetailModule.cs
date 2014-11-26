@@ -37,21 +37,21 @@ namespace Site.RestModules
 
                 if (hydrant != null)
                 {
-                    sb.Append(@"<table width=""100%"" >");
-                    sb.Append(@"<tr class=""hdHeaderRow"">");
-                    sb.Append(@"<td class=""hdHeaderColumn"" colspan=""2"">Hydrant</td>");
-                    sb.Append(@"</tr>");
+                    sb.Append("<table width=\"100%\" >");
+                    sb.Append("<tr class=\"hdHeaderRow\">");
+                    sb.Append("<td class=\"hdHeaderColumn\" colspan=\"2\">Hydrant</td>");
+                    sb.Append("</tr>");
 
                     if (hydrant.Position != null)
                     {
-                        sb.Append(@"<tr class=""hdPosition"" >");
-                        sb.Append(@"<td class=""hdPositionTitle""><strong>Latitude</strong></td>");
-                        sb.AppendFormat(@"<td class=""hdPositionValue"">{0}</td>",
+                        sb.Append("<tr class=\"hdPosition\" >");
+                        sb.Append("<td class=\"hdPositionTitle\"><strong>Latitude</strong></td>");
+                        sb.AppendFormat("<td class=\"hdPositionValue\">{0}</td>",
                             hydrant.Position.Y.ToString("0.00000000"));
-                        sb.Append(@"</tr>");
-                        sb.Append(@"<tr class=""hdPosition"">");
-                        sb.Append(@"<td class=""hdPositionTitle""><strong>Longitude</strong></td>");
-                        sb.AppendFormat(@"<td class=""hdPositionValue"">{0}</td>",
+                        sb.Append("</tr>");
+                        sb.Append("<tr class=\"hdPosition\">");
+                        sb.Append("<td class=\"hdPositionTitle\"><strong>Longitude</strong></td>");
+                        sb.AppendFormat("<td class=\"hdPositionValue\">{0}</td>",
                             hydrant.Position.X.ToString("0.00000000"));
                         sb.Append("</tr>");
                     }
@@ -63,38 +63,38 @@ namespace Site.RestModules
                     if (thumbNailURL != null
                         && mediumSizeURL != null)
                     {
-                        sb.Append(@"<tr class=""hdImageRow"" >");
-                        sb.Append(@"<td class=""hdImageColumn"" colspan=""2"">");
-                        sb.Append(@"<a href=""http://");
+                        sb.Append("<tr class=\"hdImageRow\" >");
+                        sb.Append("<td class=\"hdImageColumn\" colspan=\"2\">");
+                        sb.Append("<a href=\"");
                         sb.Append(mediumSizeURL);
-                        sb.Append(@""" target=""_blank"" >");
-                        sb.Append(@"<img src=""http://");
+                        sb.Append("\" target=\"_blank\" >");
+                        sb.Append("<img src=\"");
                         sb.Append(thumbNailURL);
-                        sb.Append(@""" alt=""Image""/></a></td>");
-                        sb.Append(@"</tr>");
+                        sb.Append("\" alt=\"Image\"/></a></td>");
+                        sb.Append("</tr>");
                     }
 
                     if (hydrant.Properties.Count > 0)
                     {
                         //Add the tagger attribution
-                        sb.Append(@"<tr class=""hdTaggersRow""  >");
-                        sb.Append(@"<td class=""hdTaggersColumn"" colspan=""2"">Extended Properties</td>");
+                        sb.Append("<tr class=\"hdTaggersRow\"  >");
+                        sb.Append("<td class=\"hdTaggersColumn\" colspan=\"2\">Extended Properties</td>");
 
 
                         foreach (Property prop in hydrant.Properties)
                         {
-                            sb.Append(@"<tr class=""hdPosition"" >");
-                            sb.Append(@"<td class=""hdPositionTitle""><strong>");
+                            sb.Append("<tr class=\"hdPosition\" >");
+                            sb.Append("<td class=\"hdPositionTitle\"><strong>");
                             sb.Append(prop.Name);
-                            sb.Append(@"</strong></td>");
-                            sb.AppendFormat(@"<td class=""hdPositionValue"">{0}</td>", prop.Value);
-                            sb.Append(@"</tr>");
+                            sb.Append("</strong></td>");
+                            sb.AppendFormat("<td class=\"hdPositionValue\">{0}</td>", prop.Value);
+                            sb.Append("</tr>");
                         }
                     }
 
                     //Add the tagger attribution
-                    sb.Append(@"<tr class=""hdTaggersRow""  >");
-                    sb.Append(@"<td class=""hdTaggersColumn"" colspan=""2"">Taggers</td>");
+                    sb.Append("<tr class=\"hdTaggersRow\" >");
+                    sb.Append("<td class=\"hdTaggersColumn\" colspan=\"2\">Taggers</td>");
 
                     Dictionary<Guid, User> users = new Dictionary<Guid, User>();
 
@@ -130,11 +130,11 @@ namespace Site.RestModules
                             userName = user.DisplayName;
                         }
 
-                        sb.Append(@"<tr class=""hdTaggerRow""  >");
-                        sb.AppendFormat(@"<td class=""hdTaggerColumn"" colspan=""2"" >{0} : {1}</td>", 
+                        sb.Append("<tr class=\"hdTaggerRow\"  >");
+                        sb.AppendFormat("<td class=\"hdTaggerColumn\" colspan=\"2\" >{0} : {1}</td>", 
                             source,
                             userName);
-                        sb.Append(@"</tr>");
+                        sb.Append("</tr>");
                     }
 
                     sb.Append("</table>");

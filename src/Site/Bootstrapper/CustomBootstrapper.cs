@@ -35,11 +35,11 @@ namespace Site.Bootstrapper
             base.ConfigureConventions(_conventions);
             
             _conventions.StaticContentsConventions.Add(
-                StaticContentConventionBuilder.AddDirectory("TagApp", @"TagApp")
+                StaticContentConventionBuilder.AddDirectory("tagapp", @"TagApp")
             );
 
             _conventions.StaticContentsConventions.Add(
-                StaticContentConventionBuilder.AddDirectory("Style", @"Style")
+                StaticContentConventionBuilder.AddDirectory("style", @"Style")
             );
 
             _conventions.StaticContentsConventions.Add(
@@ -47,7 +47,7 @@ namespace Site.Bootstrapper
             );
 
             _conventions.StaticContentsConventions.Add(
-                StaticContentConventionBuilder.AddDirectory("Images", @"images")
+                StaticContentConventionBuilder.AddDirectory("images", @"images")
             );
         }
     }
