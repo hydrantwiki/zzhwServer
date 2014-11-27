@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+    <head>
+        <title>HydrantWiki</title>
+        <meta name="viewport"  content="initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+        
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />       
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+
+        <link rel="stylesheet" href="/style/tagapp.css" />
+        <script type="text/javascript" src="/js/tagapp.js"></script>
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+        <link rel="apple-touch-icon" sizes="57x57" href="http://images.hydrantwiki.com/web/icons/apple/apple_icon_57_57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://images.hydrantwiki.com/web/icons/apple/apple_icon_72_72.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://images.hydrantwiki.com/web/icons/apple/apple_icon_114_114.png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://images.hydrantwiki.com/web/icons/apple/apple_icon_144_144.png" />
+
+        <link href="http://images.hydrantwiki.com/web/splash/apple/splash_320_460.jpg" media="(device-width: 320px)" rel="apple-touch-startup-image"/>
+        <link href="http://images.hydrantwiki.com/web/splash/apple/splash_640_920.jpg" media="(device-width: 320px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image"/>
+        <link href="http://images.hydrantwiki.com/web/splash/apple/splash_768_1004.jpg" media="(device-width: 768px) and (orientation: portrait)" rel="apple-touch-startup-image"/>
+        <link href="http://images.hydrantwiki.com/web/splash/apple/splash_1536_2008.jpg" media="(device-width: 1536px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image"/>
+    </head>
+    <body>
+         <script type="text/javascript">
+             $(document).ready(function () {
+                 SetupApp();
+
+                 Reauthorize();
+             });
+         </script>
+
+         <div data-role="page" id="home" >
+            <div data-role="header" id="home_header">
+                <h1>HydrantWiki</h1>
+                <a data-role="button" id="home_about" href="#about" data-transition="slideup" class="ui-btn-right" data-icon="info">About</a>
+            </div>
+            <div data-role="content" id="home_content">
+            </div>
+            <div data-role="footer" id="home_footer" data-position="fixed" >
+            <p>Add this page to your home screen to view the custom icon, startup screen, and full screen mode.</p>
+            </div>
+        </div>
+        <div data-role="page" id="about">
+            <div data-role="header" id="about_header">
+                <h1>HydrantWiki</h1>
+                <a href="#home" data-role="button" data-rel="back" data-icon="home">Home</a>
+            </div>
+            <div data-role="content" id="about_content">
+                <p>
+                    <img alt="" src="http://images.hydrantwiki.com/web/Logo_half.png" />
+                </p>
+                <p>
+                    <strong>HydrantWiki</strong>
+                    <br/>Version 0.3 beta<br/>
+                    <a href="http://www.hydrantwiki.com" target="_blank">HydrantWiki</a>
+                </p>
+                <p>
+                    <em>HydrantWiki is a crowd sourced hydrant location database.</em>
+                </p>
+                <p>Licenses used in HydrantWiki Mobile
+                    <ul>
+                    <li><a href="http://jquery.org/license/" target="_blank">jQuery</a></li>
+                    </ul>
+                </p>
+                <p>
+                    <a target="_blank" href="http://twitter.com/hydrantwiki">Follow @hydrantwiki on Twitter</a>
+                </p>
+            </div>
+            <div data-role="footer" id="about_footer" data-position="fixed" >
+                <p>Application - Copyright 2013 by TreeGecko Productions LLC</p>
+                <p><a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This data is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US" target="_blank">Creative Commons Attribution 3.0 Unported License</a>.</p>
+            </div>
+        </div>
+        <div data-role="page" id="quicktag">
+            <div data-role="header" id="quicktag-header">
+                <h1>Quick Tag</h1>
+                <a id="qthomebutton" href="#home" data-rel="back" data-icon="home">Home</a>
+            </div>
+            <div data-role="content" id="quicktag_content"></div>
+            <div data-role="footer" id="quicktag_footer" data-position="fixed" >www.hydrantwiki.com</div>
+        </div>
+        <div data-role="page" id="login">
+            <div data-role="header" id="login-header">
+                <h1>Login</h1>
+            </div>
+            <div data-role="content" id="login-content">
+                <label for="txtUserName">User Name:</label>
+                <input type="text" data-clear-btn="true" name="txtUserName" id="txtUserName" value=""/>
+
+                <label for="txtPassword">Password:</label>
+                <input type="password" data-clear-btn="true" name="txtPassword" id="txtPassword" value="" autocomplete="off"/>
+
+                <input type="button" value="Login" name="btnLogin" id="btnLogin"/>
+                <label name="lblStatus" id="lblStatus"></label>
+            </div>
+            <div data-role="footer" id="login-footer" data-position="fixed" >www.hydrantwiki.com</div>
+        </div>
+    </body>
+</html>

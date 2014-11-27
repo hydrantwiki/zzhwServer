@@ -103,15 +103,15 @@
     <Content Include="Style\app.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="TagApp\hydrantwiki.css">
+    <Content Include="Style\tagapp.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="TagApp\hydrantwiki.js">
+    <Content Include="js\tagapp.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="TagApp\index.html">
+    <None Include="Views\tagapp.sshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="Views\changepassword.sshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -150,6 +150,7 @@
     <Compile Include="Modules\AppModule.cs" />
     <Compile Include="Modules\LoginModule.cs" />
     <Compile Include="Modules\RegisterModule.cs" />
+    <Compile Include="Modules\TagAppModule.cs" />
     <Compile Include="Objects\NancyUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestModules\AuthorizationModule.cs" />
@@ -200,6 +201,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="TagApp\" />
     <Folder Include="Templates\" />
   </ItemGroup>
   <ItemGroup>

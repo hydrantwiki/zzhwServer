@@ -2,11 +2,12 @@
 <publishData>
   <publishProfile publishUrl="D:\publish\HydrantWiki" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="False" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
     <file relUrl="Views/reset.sshtml" publishTime="11/27/2014 01:53:02" />
-    <file relUrl="TagApp/index.html" publishTime="11/26/2014 04:45:01" />
     <file relUrl="bin/tgMongo.pdb" publishTime="11/27/2014 01:13:37" />
+    <file relUrl="js/tagapp.js" publishTime="11/09/2014 21:14:46" />
     <file relUrl="Views/mytags.sshtml" publishTime="11/23/2014 05:12:53" />
     <file relUrl="bin/tgCommonLibrary.pdb" publishTime="11/27/2014 01:13:35" />
     <file relUrl="bin/tgMongo.dll" publishTime="11/27/2014 01:13:37" />
+    <file relUrl="Style/tagapp.css" publishTime="11/08/2014 20:28:03" />
     <file relUrl="Views/hydrants.sshtml" publishTime="11/27/2014 03:13:53" />
     <file relUrl="bin/Newtonsoft.Json.dll" publishTime="07/15/2014 02:10:08" />
     <file relUrl="bin/Views/register.sshtml" publishTime="11/17/2014 05:04:14" />
@@ -18,15 +19,15 @@
     <file relUrl="Views/login.sshtml" publishTime="11/27/2014 01:52:28" />
     <file relUrl="Views/downloaddata.sshtml" publishTime="11/17/2014 04:49:58" />
     <file relUrl="js/app.js" publishTime="11/27/2014 02:19:47" />
-    <file relUrl="bin/hwDataLibrary.dll" publishTime="11/27/2014 01:13:38" />
+    <file relUrl="bin/hwDataLibrary.dll" publishTime="11/27/2014 16:42:38" />
     <file relUrl="bin/Views/hydrants.sshtml" publishTime="11/27/2014 03:13:53" />
-    <file relUrl="bin/Site.dll" publishTime="11/27/2014 06:43:05" />
+    <file relUrl="bin/Site.dll" publishTime="11/27/2014 16:48:42" />
     <file relUrl="Views/logout.sshtml" publishTime="11/27/2014 02:19:47" />
-    <file relUrl="bin/Site.pdb" publishTime="11/27/2014 06:43:05" />
+    <file relUrl="bin/Site.pdb" publishTime="11/27/2014 16:48:42" />
     <file relUrl="Views/master.sshtml" publishTime="11/27/2014 01:50:13" />
     <file relUrl="bin/AWSSDK.xml" publishTime="10/23/2014 10:05:12" />
     <file relUrl="bin/Views/loginmaster.sshtml" publishTime="11/27/2014 01:49:36" />
-    <file relUrl="bin/tgNet.pdb" publishTime="11/27/2014 01:13:38" />
+    <file relUrl="bin/tgNet.pdb" publishTime="11/27/2014 16:42:37" />
     <file relUrl="bin/tgGeoframeworks.dll" publishTime="11/27/2014 01:13:37" />
     <file relUrl="Views/HydrantDetail.sshtml" publishTime="11/27/2014 03:22:03" />
     <file relUrl="bin/Views/reviewtags.sshtml" publishTime="11/23/2014 05:12:53" />
@@ -38,29 +39,29 @@
     <file relUrl="Views/reviewtag.sshtml" publishTime="11/27/2014 03:04:37" />
     <file relUrl="packages.config" publishTime="11/09/2014 19:48:36" />
     <file relUrl="bin/Nancy.Hosting.Aspnet.dll" publishTime="11/27/2014 01:12:28" />
-    <file relUrl="bin/TagApp/hydrantwiki.js" publishTime="11/09/2014 21:14:46" />
     <file relUrl="bin/Nancy.Authentication.Forms.xml" publishTime="11/27/2014 01:12:28" />
     <file relUrl="Images/fire-hydrant-2.png" publishTime="11/15/2014 23:09:37" />
     <file relUrl="bin/MongoDB.Bson.dll" publishTime="08/27/2013 02:11:23" />
-    <file relUrl="bin/tgAWS.pdb" publishTime="11/27/2014 01:13:38" />
-    <file relUrl="Web.config" publishTime="11/27/2014 03:30:58" />
+    <file relUrl="bin/tgAWS.pdb" publishTime="11/27/2014 16:42:37" />
+    <file relUrl="Web.config" publishTime="11/27/2014 16:34:35" />
     <file relUrl="bin/Views/login.sshtml" publishTime="11/27/2014 01:52:28" />
-    <file relUrl="bin/tgAWS.dll" publishTime="11/27/2014 01:13:38" />
+    <file relUrl="bin/tgAWS.dll" publishTime="11/27/2014 16:42:37" />
     <file relUrl="Views/popupmap.sshtml" publishTime="11/27/2014 03:09:40" />
     <file relUrl="Views/home.sshtml" publishTime="11/22/2014 05:27:27" />
     <file relUrl="bin/Views/HydrantDetail.sshtml" publishTime="11/27/2014 03:22:03" />
     <file relUrl="bin/js/app.js" publishTime="11/27/2014 02:19:47" />
-    <file relUrl="TagApp/hydrantwiki.css" publishTime="11/08/2014 20:28:03" />
     <file relUrl="bin/Views/menu.sshtml" publishTime="11/18/2014 04:53:12" />
+    <file relUrl="bin/Style/tagapp.css" publishTime="11/08/2014 20:28:03" />
+    <file relUrl="bin/Views/tagapp.sshtml" publishTime="11/27/2014 16:54:43" />
     <file relUrl="bin/Images/fire-hydrant-2.png" publishTime="11/15/2014 23:09:37" />
-    <file relUrl="bin/hwDataLibrary.pdb" publishTime="11/27/2014 01:13:38" />
+    <file relUrl="bin/hwDataLibrary.pdb" publishTime="11/27/2014 16:42:38" />
     <file relUrl="Style/app.css" publishTime="11/24/2014 05:15:28" />
     <file relUrl="Views/register.sshtml" publishTime="11/17/2014 05:04:14" />
-    <file relUrl="TagApp/hydrantwiki.js" publishTime="11/09/2014 21:14:46" />
     <file relUrl="Views/loginmaster.sshtml" publishTime="11/27/2014 01:49:36" />
     <file relUrl="Views/default.sshtml" publishTime="11/26/2014 03:35:53" />
     <file relUrl="bin/Views/home.sshtml" publishTime="11/22/2014 05:27:27" />
     <file relUrl="bin/Views/reset.sshtml" publishTime="11/27/2014 01:53:02" />
+    <file relUrl="bin/js/tagapp.js" publishTime="11/09/2014 21:14:46" />
     <file relUrl="bin/Views/master.sshtml" publishTime="11/27/2014 01:50:13" />
     <file relUrl="bin/MongoDB.Driver.dll" publishTime="08/27/2013 02:11:24" />
     <file relUrl="bin/Views/popupmap.sshtml" publishTime="11/27/2014 03:09:40" />
@@ -69,10 +70,8 @@
     <file relUrl="bin/Views/changepassword.sshtml" publishTime="11/17/2014 04:49:58" />
     <file relUrl="bin/Views/reviewtag.sshtml" publishTime="11/27/2014 03:04:37" />
     <file relUrl="bin/tgGeoframeworks.pdb" publishTime="11/27/2014 01:13:37" />
-    <file relUrl="bin/tgNet.dll" publishTime="11/27/2014 01:13:38" />
-    <file relUrl="bin/TagApp/index.html" publishTime="11/26/2014 04:45:01" />
+    <file relUrl="bin/tgNet.dll" publishTime="11/27/2014 16:42:37" />
     <file relUrl="bin/Views/logout.sshtml" publishTime="11/27/2014 02:19:47" />
     <file relUrl="bin/Views/mytags.sshtml" publishTime="11/23/2014 05:12:53" />
-    <file relUrl="bin/TagApp/hydrantwiki.css" publishTime="11/08/2014 20:28:03" />
   </publishProfile>
 </publishData>

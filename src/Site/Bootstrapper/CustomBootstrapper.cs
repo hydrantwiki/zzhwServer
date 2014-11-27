@@ -33,11 +33,7 @@ namespace Site.Bootstrapper
         protected override void ConfigureConventions(NancyConventions _conventions)
         {
             base.ConfigureConventions(_conventions);
-            
-            _conventions.StaticContentsConventions.Add(
-                StaticContentConventionBuilder.AddDirectory("tagapp", @"TagApp")
-            );
-
+           
             _conventions.StaticContentsConventions.Add(
                 StaticContentConventionBuilder.AddDirectory("style", @"Style")
             );
