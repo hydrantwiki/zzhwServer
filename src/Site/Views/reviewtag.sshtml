@@ -14,7 +14,7 @@ Review Tag
 	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
 	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet' />
 	<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwnUWy9gT-OvVhBX0R4CrvU49GUA7TzQM&sensor=false"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=@Context.ViewBag.GoogleMapsKey&sensor=false"></script>
 @EndSection
 
 @Section['Content']
@@ -49,8 +49,8 @@ Review Tag
     }
 
     function setupMap() {
-		L.mapbox.accessToken = 'pk.eyJ1IjoiYmVuZ2Vja28iLCJhIjoiWWZUV19DWSJ9.tZeFW6lO74I48ZC24-bB2w';
-		map = L.mapbox.map('mapNearbyHydrants', 'bengecko.map-vqbbmhmw').setView([40.26, -96.870], 3);
+		L.mapbox.accessToken = '@Context.ViewBag.MapBoxKey';
+		map = L.mapbox.map('mapNearbyHydrants', '@Context.ViewBag.MapBoxMap').setView([40.26, -96.870], 3);
     }
 </script>
 <input type="hidden" id="hidTagGuid" name="hidTagGuid" value="@Model.Guid">

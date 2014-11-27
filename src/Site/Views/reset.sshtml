@@ -8,23 +8,22 @@ Reset your password
 @EndSection
 
 @Section['Content']
-	<h1>Login</h1>
 	<div id="resetform" >
 		<div class="row">
-			<div class="col-md-2">
-				<label for="user">Email Address</label>
-			<div>
 			<div class="col-md-3">
+				<label for="user">Email Address</label>
+			</div>
+			<div class="col-md-6">
 				<input type="text" id="txtEmailAddress" name="txtEmailAddress"/>
 			</div>
 		</div>
 		<div class="row">	
-			<div class="col-md-5">
+			<div class="col-md-9">
 				<input type="button" id="btnLogin" value="Reset Password" OnClick="ResetPassword()" />
 			</div>
 		</div>
 		<div class="row">	
-			<div class="col-md-5">
+			<div class="col-md-9">
 				<label id="lblStatus" />
 			</div>
 		</div>

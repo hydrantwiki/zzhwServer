@@ -10,33 +10,33 @@ Login
 @Section['Content']
 	<form id="loginform" action="javascript:login();">
 		<div class="row">
-			<div class="col-md-2"> 
+			<div class="col-md-3"> 
 				<label for="user">Username</label>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-6">
 				<input type="text" id="txtUsername" name="txtUsername"/>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<label for="password">Password</label>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-6">
 				<input type="password" id="txtPassword" name="txtPassword" />
 			</div>
 		</div>
 		<div class="row">	
-			<div class="col-md-5">
+			<div class="col-md-9">
 				<input type="submit" id="btnLogin" class="btn btn-primary" value="Login"/>
 			</div>
 		</div>
 		<div class="row">	
-			<div class="col-md-5">
+			<div class="col-md-9">
 				<label id="lblStatus" />
 			</div>
 		</div>
 		<div class="row">	
-			<div class="col-md-5">
+			<div class="col-md-9">
 				<a href="/reset">Forgot your password</a>
 			</div>
 		</div>

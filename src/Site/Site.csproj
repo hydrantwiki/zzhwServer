@@ -106,6 +106,7 @@
     <None Include="Views\default.sshtml" />
     <None Include="Views\downloaddata.sshtml" />
     <None Include="Views\home.sshtml" />
+    <None Include="Views\HydrantDetail.sshtml" />
     <None Include="Views\hydrants.sshtml" />
     <None Include="Views\login.sshtml" />
     <Content Include="js\app.js" />
@@ -120,7 +121,6 @@
     <Compile Include="JsonObjects\ReviewTag.cs" />
     <Compile Include="JsonObjects\Tag.cs" />
     <Compile Include="JsonObjects\TagTableResponse.cs" />
-    <Compile Include="Modules\RootModule.cs" />
     <Compile Include="Modules\AppModule.cs" />
     <Compile Include="Modules\LoginModule.cs" />
     <Compile Include="Modules\RegisterModule.cs" />

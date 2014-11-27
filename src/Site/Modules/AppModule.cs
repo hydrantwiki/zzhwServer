@@ -17,6 +17,11 @@ namespace Site.Modules
         {
             this.RequiresAuthentication();
            
+            Get["/"] = _parameters =>
+            {
+                return View["home.sshtml"];
+            };
+
             Get["/home"] = _parameters =>
             {
                 return View["home.sshtml"];
@@ -29,6 +34,9 @@ namespace Site.Modules
 
             Get["/hydrants"] = _parameters =>
             {
+                Context.ViewBag.MapBoxMap = Config.GetSettingValue("MapBoxHydrantMap");
+                Context.ViewBag.MapBoxKey = Config.GetSettingValue("MapBoxKey");
+                
                 return View["hydrants.sshtml"];
             };
 
@@ -70,6 +78,10 @@ namespace Site.Modules
 
             Get["/reviewtag/{Guid}"] = _parameters =>
             {
+                Context.ViewBag.MapBoxMap = Config.GetSettingValue("MapBoxMap");
+                Context.ViewBag.MapBoxKey = Config.GetSettingValue("MapBoxKey");
+                Context.ViewBag.GoogleMapsKey = Config.GetSettingValue("GoogleMapsKey");
+
                 if (Context.CurrentUser.HasClaim("SuperUser")
                     || Context.CurrentUser.HasClaim("Admin"))
                 {
@@ -124,6 +136,9 @@ namespace Site.Modules
                 && _parameters.ContainsKey("Guid")
                 && GuidHelper.IsValidGuidString(_parameters["Guid"]))
             {
+                Context.ViewBag.MapBoxMap = Config.GetSettingValue("MapBoxMap");
+                Context.ViewBag.MapBoxKey = Config.GetSettingValue("MapBoxKey");
+
                 Guid tagGuid = new Guid(_parameters["Guid"]);
 
                 HydrantWikiManager hwm = new HydrantWikiManager();

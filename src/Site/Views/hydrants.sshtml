@@ -91,8 +91,8 @@ Hydrants
         }
 
         function setupMap() {
-			L.mapbox.accessToken = 'pk.eyJ1IjoiYmVuZ2Vja28iLCJhIjoiWWZUV19DWSJ9.tZeFW6lO74I48ZC24-bB2w';
-			map = L.mapbox.map('hydrantsMap', 'bengecko.k87e169i').setView([40.26, -96.870], 3);
+			L.mapbox.accessToken = '@Context.ViewBag.MapBoxKey';
+			map = L.mapbox.map('hydrantsMap', '@Context.ViewBag.MapBoxMap').setView([40.26, -96.870], 3);
 
             map.on("zoomend", zoomedCallback);
             map.on("moveend", pannedCallback);

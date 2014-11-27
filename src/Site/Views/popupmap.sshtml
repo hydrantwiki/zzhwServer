@@ -14,8 +14,8 @@
 <body>
 <div id='map'></div>
 <script>
-L.mapbox.accessToken = 'pk.eyJ1IjoiYmVuZ2Vja28iLCJhIjoiWWZUV19DWSJ9.tZeFW6lO74I48ZC24-bB2w';
-var map = L.mapbox.map('map', 'bengecko.map-vqbbmhmw')
+L.mapbox.accessToken = '@Context.ViewBag.MapBoxKey';
+var map = L.mapbox.map('map', '@Context.ViewBag.MapBoxMap')
     .setView([@Model.Position.Y, @Model.Position.X], 16);
 
 var myLayer = L.mapbox.featureLayer().addTo(map);

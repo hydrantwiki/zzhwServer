@@ -51,7 +51,12 @@ namespace Site.Modules
 
             Get["/logout"] = _parameters =>
             {
-                return this.LogoutAndRedirect("/");
+                return this.LogoutAndRedirect("/logoutcomplete");
+            };
+
+            Get["/logoutcomplete"] = _parameters =>
+            {
+                return View["logout.sshtml"];
             };
 
             Get["/reset"]  = _parameters =>

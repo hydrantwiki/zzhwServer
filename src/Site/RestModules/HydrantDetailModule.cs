@@ -5,6 +5,7 @@ using HydrantWiki.Library.Helpers;
 using HydrantWiki.Library.Managers;
 using HydrantWiki.Library.Objects;
 using Nancy;
+using TreeGecko.Library.Common.Helpers;
 using TreeGecko.Library.Common.Objects;
 
 namespace Site.RestModules
@@ -15,6 +16,9 @@ namespace Site.RestModules
         {
             Get["/rest/hydrant/{hydrantguid}"] = _parameters =>
             {
+                Context.ViewBag.MapBoxMap = Config.GetSettingValue("MapBoxMap");
+                Context.ViewBag.MapBoxKey = Config.GetSettingValue("MapBoxKey");
+
                 Response response = (Response)HandleGet(_parameters);
                 response.ContentType = "application/json";
                 return response;
@@ -39,7 +43,7 @@ namespace Site.RestModules
                 {
                     sb.Append("<table width=\"100%\" >");
                     sb.Append("<tr class=\"hdHeaderRow\">");
-                    sb.Append("<td class=\"hdHeaderColumn\" colspan=\"2\">Hydrant</td>");
+                    sb.Append("<td class=\"hdHeaderColumn\" colspan=\"2\"><h3>Hydrant</h3></td>");
                     sb.Append("</tr>");
 
                     if (hydrant.Position != null)
@@ -78,7 +82,7 @@ namespace Site.RestModules
                     {
                         //Add the tagger attribution
                         sb.Append("<tr class=\"hdTaggersRow\"  >");
-                        sb.Append("<td class=\"hdTaggersColumn\" colspan=\"2\">Extended Properties</td>");
+                        sb.Append("<td class=\"hdTaggersColumn\" colspan=\"2\"><h4>Extended Properties</h4></td>");
 
 
                         foreach (Property prop in hydrant.Properties)
@@ -94,7 +98,7 @@ namespace Site.RestModules
 
                     //Add the tagger attribution
                     sb.Append("<tr class=\"hdTaggersRow\" >");
-                    sb.Append("<td class=\"hdTaggersColumn\" colspan=\"2\">Taggers</td>");
+                    sb.Append("<td class=\"hdTaggersColumn\" colspan=\"2\"><h4>Taggers</h4></td>");
 
                     Dictionary<Guid, User> users = new Dictionary<Guid, User>();
 
