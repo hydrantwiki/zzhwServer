@@ -21,9 +21,9 @@
     <file relUrl="js/app.js" publishTime="11/27/2014 02:19:47" />
     <file relUrl="bin/hwDataLibrary.dll" publishTime="11/27/2014 16:42:38" />
     <file relUrl="bin/Views/hydrants.sshtml" publishTime="11/27/2014 03:13:53" />
-    <file relUrl="bin/Site.dll" publishTime="11/27/2014 16:48:42" />
+    <file relUrl="bin/Site.dll" publishTime="11/27/2014 17:11:12" />
     <file relUrl="Views/logout.sshtml" publishTime="11/27/2014 02:19:47" />
-    <file relUrl="bin/Site.pdb" publishTime="11/27/2014 16:48:42" />
+    <file relUrl="bin/Site.pdb" publishTime="11/27/2014 17:11:12" />
     <file relUrl="Views/master.sshtml" publishTime="11/27/2014 01:50:13" />
     <file relUrl="bin/AWSSDK.xml" publishTime="10/23/2014 10:05:12" />
     <file relUrl="bin/Views/loginmaster.sshtml" publishTime="11/27/2014 01:49:36" />
@@ -45,6 +45,7 @@
     <file relUrl="bin/tgAWS.pdb" publishTime="11/27/2014 16:42:37" />
     <file relUrl="Web.config" publishTime="11/27/2014 16:34:35" />
     <file relUrl="bin/Views/login.sshtml" publishTime="11/27/2014 01:52:28" />
+    <file relUrl="Views/tagapp.sshtml" publishTime="11/27/2014 16:54:43" />
     <file relUrl="bin/tgAWS.dll" publishTime="11/27/2014 16:42:37" />
     <file relUrl="Views/popupmap.sshtml" publishTime="11/27/2014 03:09:40" />
     <file relUrl="Views/home.sshtml" publishTime="11/22/2014 05:27:27" />
