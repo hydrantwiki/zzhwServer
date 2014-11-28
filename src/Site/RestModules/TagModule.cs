@@ -316,7 +316,8 @@ namespace Site.RestModules
                         LastModifiedDateTime = DateTime.UtcNow,
                         UserGuid = user.Guid,
                         VersionTimeStamp = DateTime.UtcNow.ToString("u"),
-                        Position = geoPoint
+                        Position = geoPoint,
+                        Status = TagStatus.Pending
                     };
 
                     if (Request.Files.Any())
@@ -330,6 +331,9 @@ namespace Site.RestModules
 
                     try
                     {
+                        hwManager.Persist(tag);
+                        hwManager.LogVerbose(user.Guid, "Tag Saved");
+
                         if (tag.ImageGuid != null)
                         {
                             HttpFile file = Request.Files.First();
@@ -345,14 +349,14 @@ namespace Site.RestModules
                                 hwManager.PersistOriginal(tag.ImageGuid.Value, ".jpg", "image/jpg", data);
 
                                 hwManager.LogVerbose(user.Guid, "Tag Image Saved");
-
-                                return @"{ ""Result"":""Success"" }"; 
                             }
                             catch (Exception ex)
                             {
                                 hwManager.LogException(user.Guid, ex);
                             }
                         }
+
+                        return @"{ ""Result"":""Success"" }"; 
                     }
                     catch (Exception ex)
                     {
