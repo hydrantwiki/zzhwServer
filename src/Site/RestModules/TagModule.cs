@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using HydrantWiki.Library.Constants;
 using HydrantWiki.Library.Managers;
@@ -9,6 +10,7 @@ using Newtonsoft.Json;
 using Site.Helpers;
 using Site.JsonObjects;
 using TreeGecko.Library.Common.Enums;
+using TreeGecko.Library.Common.Helpers;
 using TreeGecko.Library.Geospatial.Objects;
 using Tag = HydrantWiki.Library.Objects.Tag;
 
@@ -347,8 +349,15 @@ namespace Site.RestModules
                                 file.Value.Read(data, 0, (int)fileSize);
                                
                                 hwManager.PersistOriginal(tag.ImageGuid.Value, ".jpg", "image/jpg", data);
-
                                 hwManager.LogVerbose(user.Guid, "Tag Image Saved");
+
+                                Image original = ImageHelper.GetImage(data);
+
+                                data = ImageHelper.GetThumbnailBytesOfMaxSize(original, 800);
+                                hwManager.PersistWebImage(tag.ImageGuid.Value, ".jpg", "image/jpg", data);
+                               
+                                data = ImageHelper.GetThumbnailBytesOfMaxSize(original, 100);
+                                hwManager.PersistThumbnailImage(tag.ImageGuid.Value, ".jpg", "image/jpg", data);
                             }
                             catch (Exception ex)
                             {
