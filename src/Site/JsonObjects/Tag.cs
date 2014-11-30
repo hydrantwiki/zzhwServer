@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using HydrantWiki.Library.Helpers;
-using TreeGecko.Library.Common.Helpers;
-using TreeGecko.Library.Geospatial.Geoframeworks.Objects;
+﻿using HydrantWiki.Library.Helpers;
 
 namespace Site.JsonObjects
 {
@@ -13,12 +7,14 @@ namespace Site.JsonObjects
         public string Location { get; set; }
         public string TagDateTime { get; set; }
         public string Thumbnail { get; set; }
+        public string Status { get; set; }
 
         public Tag(HydrantWiki.Library.Objects.Tag _tag,
                    bool _showViewMapButton = true,
                    bool _allowViewFullImage = true)
         {
             TagDateTime = _tag.DeviceDateTime.ToString("G");
+            Status = _tag.Status;
 
             if (_allowViewFullImage)
             {
@@ -28,9 +24,6 @@ namespace Site.JsonObjects
             {
                 Thumbnail = string.Format("<img src=\"{0}\" class=\"tagimg\" >", _tag.GetUrl(true));
             }
-
-            
-            
 
             if (_tag.Position != null)
             {
@@ -49,6 +42,5 @@ namespace Site.JsonObjects
                 }
             }
         }
-
     }
 }

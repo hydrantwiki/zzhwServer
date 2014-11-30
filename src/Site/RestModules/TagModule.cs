@@ -254,6 +254,10 @@ namespace Site.RestModules
                     foreach (Tag tag in tags)
                     {
                         JsonObjects.ReviewTag jReviewTag = new JsonObjects.ReviewTag(tag);
+
+                        User tagUser = (User)hwManager.GetUser(tag.UserGuid);
+                        jReviewTag.Username = tagUser.GetUsernameWithSource();
+
                         response.Data.Add(jReviewTag);
                     }
 

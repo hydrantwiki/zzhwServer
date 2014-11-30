@@ -146,9 +146,10 @@ function GetPendingTagsReceived(response) {
     $('#tags_table').dataTable({
         data: response.Data,
         columns: [{ "data": "ReviewButton", "width": "10%" },
-                  { "data": "TagDateTime", "width": "20%" },
-                  { "data": "Location", "width": "40%" },
-                  { "data": "Thumbnail", "width": "30%"}]
+                  { "data": "TagDateTime", "width": "25%" },
+                  { "data": "Username", "width": "20%" },
+                  { "data": "Location", "width": "25%" },
+                  { "data": "Thumbnail", "width": "20%"}]
     });
 }
 

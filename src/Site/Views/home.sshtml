@@ -11,4 +11,8 @@ HydrantWiki Review Application
 @Section['Content']
 <p>This application is designed to allow users to review the tags that they have collected over time.</p>
 <p>Users can also view the Hydrants that have been collected by the HydrantWiki (and beyond) community.</p>
+<br/>
+<p>Pending Tags - @Model.PendingTagCount</p>
+<p>Approved Tags - @Model.ApprovedTagCount</p>
+
 @EndSection

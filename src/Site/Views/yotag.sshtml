@@ -6,13 +6,25 @@
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet' />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
 <style>
   body { margin:0; padding:0; }
-  #map { position:absolute; top:0; bottom:0; width:100%; }
+  #map { position:absolute; top:0; bottom:0; width:300px; height:300px; }
 </style>
 </head>
 <body>
-<div id='map'></div>
+<div class="row">
+	<div class="col-sm-12">
+		<h3>Tag Created</h3>
+		<p>The hydrant has been tagged.</p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+		<div id="map"></div>
+	</div>
+</div>
+
 <script>
 L.mapbox.accessToken = '@Context.ViewBag.MapBoxKey';
 var map = L.mapbox.map('map', '@Context.ViewBag.MapBoxMap')

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using HydrantWiki.Library.Constants;
 using HydrantWiki.Library.Managers;
 using Nancy;
 using Nancy.Responses.Negotiation;
@@ -19,12 +20,43 @@ namespace Site.Modules
            
             Get["/"] = _parameters =>
             {
-                return View["home.sshtml"];
+                HydrantWikiManager hwm = new HydrantWikiManager();
+
+                string username = Context.CurrentUser.UserName;
+                User user = hwm.GetUserByEmail(UserSources.HydrantWiki, username);
+                if (user != null)
+                {
+                    UserStats userStats = hwm.GetUserStats(user.Guid);
+                    if (userStats == null)
+                    {
+                        userStats = new UserStats();
+
+                        return View["home.sshtml", userStats];
+                    }
+                }
+
+                return null;
+
             };
 
             Get["/home"] = _parameters =>
             {
-                return View["home.sshtml"];
+                HydrantWikiManager hwm = new HydrantWikiManager();
+
+                string username = Context.CurrentUser.UserName;
+                User user = hwm.GetUser(UserSources.HydrantWiki, username);
+                if (user != null)
+                {
+                    UserStats userStats = hwm.GetUserStats(user.Guid);
+                    if (userStats == null)
+                    {
+                        userStats = new UserStats();
+
+                        return View["home.sshtml", userStats];
+                    }
+                }
+
+                return null;
             };
 
             Get["/mytags"] = _parameters =>

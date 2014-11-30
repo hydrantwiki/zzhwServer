@@ -24,6 +24,7 @@ Review tags
 			<tr>
 				<th>Action</th>
 				<th>Tag Date Time</th>
+				<th>User</th>
 				<th>Location</th>
 				<th>Image</th>
 			</tr>
@@ -32,6 +33,7 @@ Review tags
 			<tr>
 				<th>Action</th>
 				<th>Tag Date Time</th>
+				<th>User</th>
 				<th>Location</th>
 				<th>Image</th>
 			</tr>

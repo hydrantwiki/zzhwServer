@@ -144,6 +144,7 @@
     <Compile Include="Extensions\RequestBodyExtension.cs" />
     <Compile Include="Helpers\AuthHelper.cs" />
     <Compile Include="Helpers\UserMapper.cs" />
+    <Compile Include="Helpers\YoHelper.cs" />
     <Compile Include="JsonObjects\NearbyHydrantTableResponse.cs" />
     <Compile Include="JsonObjects\ReviewTag.cs" />
     <Compile Include="JsonObjects\Tag.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="RestModules\ReauthorizeModule.cs" />
     <Compile Include="RestModules\StatisticsModule.cs" />
     <Compile Include="RestModules\TagModule.cs" />
+    <Compile Include="RestModules\YoModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -194,6 +196,7 @@
     <Content Include="Views\reviewtags.sshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Views\yotag.sshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

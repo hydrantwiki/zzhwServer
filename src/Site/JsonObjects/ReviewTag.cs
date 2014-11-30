@@ -9,6 +9,8 @@ namespace Site.JsonObjects
     {
         public string ReviewButton { get; set; }
 
+        public string Username { get; set; }
+
         public ReviewTag(HydrantWiki.Library.Objects.Tag _tag)
             : base(_tag, false, false)
         {
