@@ -56,6 +56,9 @@ namespace Site.Modules
 
                         return View["home.sshtml", userStats];
                     }
+
+                    userStats = new UserStats();
+                    return View["home.sshtml", userStats];
                 }
 
                 return null;
