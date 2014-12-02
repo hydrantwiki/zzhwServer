@@ -19,7 +19,7 @@ Reset your password
 		</div>
 		<div class="row">	
 			<div class="col-md-9">
-				<input type="button" id="btnLogin" value="Reset Password" OnClick="ResetPassword()" />
+				<input type="button" id="btnLogin" value="Reset Password" class="btn btn-primary" OnClick="ResetPassword()" />
 			</div>
 		</div>
 		<div class="row">	

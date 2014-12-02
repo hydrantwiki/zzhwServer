@@ -36,8 +36,14 @@ Login
 			</div>
 		</div>
 		<div class="row">	
-			<div class="col-md-9">
-				<a href="/reset">Forgot your password</a>
+			<div class="col-md-9">&nbsp;</div>
+		</div>
+		<div class="row">	
+			<div class="col-md-5">
+				<a href="/reset" class="btn btn-primary">Forgot your password</a>
+			</div>
+			<div class="col-md-4">
+				<a href="/register" class="btn btn-primary">Register</a>
 			</div>
 		</div>
 	</form>

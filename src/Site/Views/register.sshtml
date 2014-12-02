@@ -8,47 +8,46 @@ Register
 @EndSection
 
 @Section['Content']
-   <h1>Login</h1>
-	<form id="registerform" action="javascript:register();">
+   <form id="registerform" action="javascript:register();">
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<label for="txtUsername">Username</label>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-6">
 				<input type="text" id="txtUsername" name="txtUsername"/>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<label for="txtEmailAddress">Email Address</label>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-6">
 				<input type="text" id="txtEmailAddress" name="txtEmailAddress"/>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<label for="txtPassword">Password</label>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-6">
 				<input type="password" id="txtPassword" name="txtPassword" />
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-2">
-				<label for="txtPassword">Renenter Password</label>
-			</div>
 			<div class="col-md-3">
+				<label for="txtPassword2">Renenter Password</label>
+			</div>
+			<div class="col-md-6">
 				<input type="password" id="txtPassword2" name="txtPassword2" />
 			</div>
 		</div>
 		<div class="row">	
-			<div class="col-md-5">
+			<div class="col-md-9">
 				<input id="btnLogin" class="btn btn-primary" value="Register" type="submit" />
 			</div>
 		</div>
 		<div class="row">	
-			<div class="col-md-5">
+			<div class="col-md-9">
 				<label id="lblStatus" />
 			</div>
 		</div>

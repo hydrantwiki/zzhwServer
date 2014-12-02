@@ -14,6 +14,47 @@ function menuselect(event, ui) {
     alert("Hello");
 }
 
+function register() {
+    $("#lblStatus").removeClass("bg-success");
+    $("#lblStatus").removeClass("bg-danger");
+    
+    var username = $("#txtUsername").val();
+    var email = $("#txtEmailAddress").val();
+    var password1 = $("#txtPassword").val();
+    var password2 = $("#txtPassword2").val();
+
+    if (password1 == password2) {
+        $.ajax({
+            type: "POST",
+            url: "/register",
+            headers: { "Username": username, "Password": password1, "Email": email },
+            success: function(response) {
+                if (response.Result == "Success") {
+                    window.alert("Please check your email to verify your account.");
+
+                    window.location.replace("/login");
+                } else if (response.Result == "UsernameNotAvailable") {
+                    $("#lblStatus").text("The username is not available.");
+                    $("#lblStatus").addClass("bg-danger");
+                }
+            },
+            error: RegisterFailure,
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    } else {
+        $("#lblStatus").text("Passwords do not match.");
+        $("#lblStatus").addClass("bg-danger");
+    }
+}
+
+function RegisterFailure() {
+    $("#lblStatus").text("An error has occurred.");
+    $("#lblStatus").addClass("bg-danger");
+}
+
+
 function login() {
     var username = $("#txtUsername").val();
     var password = $("#txtPassword").val();
@@ -37,15 +78,15 @@ function login() {
             }
             else if (response.Result == "NotActive") {
                 $("#lblStatus").text("User has been deactivated.");
-                $("#lblStatus").removeClass("bg-danger");
+                $("#lblStatus").addClass("bg-danger");
             }
             else if (response.Result == "NotVerified") {
                 $("#lblStatus").text("Please verify the email address of your account.");
-                $("#lblStatus").removeClass("bg-danger");
+                $("#lblStatus").addClass("bg-danger");
             }
             else {
                 $("#lblStatus").text("Bad user or password combination.");
-                $("#lblStatus").removeClass("bg-danger");
+                $("#lblStatus").addClass("bg-danger");
             }
         },
         error: LoginFailure,

@@ -151,7 +151,6 @@
     <Compile Include="JsonObjects\TagTableResponse.cs" />
     <Compile Include="Modules\AppModule.cs" />
     <Compile Include="Modules\LoginModule.cs" />
-    <Compile Include="Modules\RegisterModule.cs" />
     <Compile Include="Modules\TagAppModule.cs" />
     <Compile Include="Objects\NancyUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -196,7 +195,15 @@
     <Content Include="Views\reviewtags.sshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Views\yotag.sshtml" />
+    <Content Include="Views\emailvalidationfailure.sshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\emailvalidationsuccess.sshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\yotag.sshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

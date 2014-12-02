@@ -8,6 +8,8 @@ using HydrantWiki.Library.Objects;
 using Nancy;
 using Nancy.Authentication.Forms;
 using Site.Helpers;
+using TreeGecko.Library.Common.Enums;
+using TreeGecko.Library.Common.Helpers;
 using TreeGecko.Library.Common.Security;
 using TreeGecko.Library.Net.Objects;
 
@@ -70,7 +72,63 @@ namespace Site.Modules
                 response.ContentType = "application/json";
                 return response;
             };
+
+            Get["/register"] = _parameters =>
+            {
+                return View["register.sshtml"];
+            };
+
+            Post["/register"] = _parameters =>
+            {
+                Response response = (Response)Register(_parameters);
+                response.ContentType = "application/json";
+                return response;
+            };
         }
+
+        private string Register(DynamicDictionary _parameters)
+        {
+            string username = Request.Headers["Username"].First();
+            string email = Request.Headers["Email"].First();
+            string password = Request.Headers["Password"].First();
+
+            HydrantWikiManager hwm = new HydrantWikiManager();
+
+            User user = hwm.GetUser(UserSources.HydrantWiki, username);
+
+            if (user == null)
+            {
+                user = new User
+                {
+                    UserSource = UserSources.HydrantWiki,
+                    IsVerified = false,
+                    Active = true,
+                    DisplayName = username,
+                    EmailAddress = email,
+                    UserType = UserTypes.User,
+                    Username = username
+                };
+                hwm.Persist(user);
+
+                TGUserPassword userPassword = TGUserPassword.GetNew(user.Guid, username, password);
+                hwm.Persist(userPassword);
+
+                TGUserEmailValidation validation = new TGUserEmailValidation(user);
+                hwm.Persist(validation);
+
+                NameValueCollection nvc = new NameValueCollection
+                {
+                    {"SystemUrl", Config.GetSettingValue("SystemUrl")},
+                    {"ValidationText", validation.ValidationText }
+                };
+                hwm.SendCannedEmail(user, CannedEmailNames.ValidateEmailAddress, nvc);
+
+                return "{ \"Result\":\"Success\" }";
+            }
+
+            return "{ \"Result\":\"UsernameNotAvailable\" }";
+        }
+
 
         private string HandleResetPassword(DynamicDictionary _parameters)
         {
@@ -102,6 +160,8 @@ namespace Site.Modules
 
             return "{ \"Result\":\"Failure\"}";
         }
+
+        
         
     }
 }

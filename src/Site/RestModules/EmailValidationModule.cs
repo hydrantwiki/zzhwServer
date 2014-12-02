@@ -9,15 +9,20 @@ namespace Site.RestModules
     {
         public EmailValidationModule()
         {
-            Get["/rest/emailvalidation/{validationtoken}"] = _parameters =>
+            Get["/emailvalidation/{validationtoken}"] = _parameters =>
             {
-                Response response = (Response) HandleGet(_parameters);
-                response.ContentType = "application/json";
-                return response;
+                bool result = HandleGet(_parameters);
+
+                if (result)
+                {
+                    return View["emailvalidationsuccess.sshtml"];
+                }
+                
+                return View["emailvalidationfailure.sshtml"];
             };
         }
 
-        private string HandleGet(DynamicDictionary _parameters)
+        private bool HandleGet(DynamicDictionary _parameters)
         {
             string validationToken = _parameters["validationtoken"];
 
@@ -39,7 +44,7 @@ namespace Site.RestModules
                         hwManager.Persist(user);
                         hwManager.Delete(uev);
 
-                        return @"{ ""Result"":""Success"" }";
+                        return true;
                     }
                     else
                     {
@@ -56,7 +61,7 @@ namespace Site.RestModules
                 //Validation text not supplied.
             }
 
-            return @"{ ""Result"":""Failure"" }";
+            return false;
         }
 
         
