@@ -145,6 +145,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="api\ApiModule.cs" />
+    <Compile Include="api\Objects\Position.cs" />
+    <Compile Include="api\Objects\Tag.cs" />
     <Compile Include="Bootstrapper\CustomBootstrapper.cs" />
     <Compile Include="Extensions\RequestBodyExtension.cs" />
     <Compile Include="Helpers\AuthHelper.cs" />
