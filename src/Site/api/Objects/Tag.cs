@@ -4,8 +4,7 @@ namespace Site.api.Objects
 {
     public class Tag
     {
-
-        public DateTime TagDateTime { get; set; }
+        public Guid? ImageGuid { get; set; }
         public Position Position { get; set; }
     }
 }

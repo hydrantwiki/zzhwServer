@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using HydrantWiki.Library.Constants;
 using HydrantWiki.Library.Managers;
 using HydrantWiki.Library.Objects;
 using Nancy;
+using Newtonsoft.Json;
 using Site.Extensions;
 using Site.Helpers;
 using TreeGecko.Library.Common.Helpers;
@@ -43,6 +45,13 @@ namespace Site.api
                 response.ContentType = "application/json";
                 return response;
             };
+
+            Post["/api/image"] = _parameters =>
+            {
+                Response response = (Response)HandleImagePost(_parameters);
+                response.ContentType = "application/json";
+                return response;
+            };
         }
 
         private string Authorize(DynamicDictionary _parameters)
@@ -54,10 +63,9 @@ namespace Site.api
 
         private string IsAvailable(DynamicDictionary _parameters)
         {
-            string username = _parameters["username"];
-
             HydrantWikiManager hwm = new HydrantWikiManager();
 
+            string username = _parameters["username"];
             User user = hwm.GetUser(UserSources.HydrantWiki, username);
 
             if (user == null)
@@ -66,6 +74,50 @@ namespace Site.api
             }
 
             return "{ \"Available\":false }";
+        }
+
+        private string HandleImagePost(DynamicDictionary _parameters)
+        {
+            User user;
+
+            if (AuthHelper.IsAuthorized(Request, out user))
+            {
+                HydrantWikiManager hwManager = new HydrantWikiManager();
+                HttpFile file = Request.Files.First();
+
+                long fileSize = file.Value.Length;
+                string fileName = file.Name;
+                string tempGuid = Path.GetFileNameWithoutExtension(fileName);
+                Guid imageGuid;
+
+                if (Guid.TryParse(tempGuid, out imageGuid))
+                {
+                    try
+                    {
+                        byte[] data = new byte[fileSize];
+                        file.Value.Read(data, 0, (int) fileSize);
+
+                        hwManager.PersistOriginal(imageGuid, ".jpg", "image/jpg", data);
+                        hwManager.LogVerbose(user.Guid, "Tag Image Saved");
+
+                        Image original = ImageHelper.GetImage(data);
+
+                        data = ImageHelper.GetThumbnailBytesOfMaxSize(original, 800);
+                        hwManager.PersistWebImage(imageGuid, ".jpg", "image/jpg", data);
+
+                        data = ImageHelper.GetThumbnailBytesOfMaxSize(original, 100);
+                        hwManager.PersistThumbnailImage(imageGuid, ".jpg", "image/jpg", data);
+
+                        return @"{ ""Result"":""Success"" }";
+                    }
+                    catch (Exception ex)
+                    {
+                        hwManager.LogException(user.Guid, ex);
+                    }
+                }
+            }
+
+            return @"{ ""Result"":""Failure"" }";
         }
 
         private string HandleTagPost(DynamicDictionary _parameters)
@@ -78,115 +130,56 @@ namespace Site.api
 
                 string json = Request.Body.ReadAsString();
 
+                Objects.Tag tag = JsonConvert.DeserializeObject<Objects.Tag>(json);
 
+                if (tag != null)
+                {
+                    if (tag.Position != null)
+                    {
+                        if (tag.Position != null)
+                        {
+                            Tag dbTag = new Tag
+                            {
+                                Active = true,
+                                DeviceDateTime = tag.Position.DeviceDateTime,
+                                LastModifiedDateTime = DateTime.UtcNow,
+                                UserGuid = user.Guid,
+                                VersionTimeStamp = DateTime.UtcNow.ToString("u"),
+                                Position = new GeoPoint(tag.Position.Longitude, tag.Position.Latitude),
+                                Status = TagStatus.Pending
+                            };
 
+                            if (Request.Files.Any())
+                            {
+                                dbTag.ImageGuid = tag.ImageGuid;
+                            }
+                            else
+                            {
+                                dbTag.ImageGuid = null;
+                            }
 
-            //    string sLongitude = Request.Form["longitudeInput"];
-            //    string sAccuracy = Request.Form["accuracyInput"];
-            //    string sDeviceDateTime = Request.Form["positionDateTimeInput"];
+                            try
+                            {
+                                hwManager.Persist(dbTag);
+                                hwManager.LogVerbose(user.Guid, "Tag Saved");                               
 
-            //    double lat = 0.0;
-            //    double lon = 0.0;
-            //    double accuracy = -1;
+                                return @"{ ""Result"":""Success"" }";
+                            }
+                            catch (Exception ex)
+                            {
+                                hwManager.LogException(user.Guid, ex);
+                            }
+                        }
+                        else
+                        {
+                            //No position
+                            hwManager.LogWarning(user.Guid, "No position");
 
-            //    DateTime deviceDateTime = DateTime.MinValue;
-            //    GeoPoint geoPoint = null;
-
-            //    if (Double.TryParse(sLatitude, out lat))
-            //    {
-            //        if (Double.TryParse(sLongitude, out lon))
-            //        {
-            //            //Ignore positions that are 0.0 and 0.0 exactly
-            //            if (!(lat.Equals(0)
-            //                  && lon.Equals(0)))
-            //            {
-            //                geoPoint = new GeoPoint { X = lon, Y = lat };
-            //            }
-            //        }
-            //    }
-
-            //    Double.TryParse(sAccuracy, out accuracy);
-            //    DateTime.TryParse(sDeviceDateTime, out deviceDateTime);
-
-            //    //If we got a timestamp that was a zero date, ignore it and use now.
-            //    if (deviceDateTime == DateTime.MinValue)
-            //    {
-            //        deviceDateTime = DateTime.UtcNow;
-            //    }
-
-            //    //We will accept a tag without a photo, but not one without a position.
-            //    if (geoPoint != null)
-            //    {
-            //        Tag tag = new Tag
-            //        {
-            //            Active = true,
-            //            DeviceDateTime = deviceDateTime,
-            //            LastModifiedDateTime = DateTime.UtcNow,
-            //            UserGuid = user.Guid,
-            //            VersionTimeStamp = DateTime.UtcNow.ToString("u"),
-            //            Position = geoPoint,
-            //            Status = TagStatus.Pending
-            //        };
-
-            //        if (Request.Files.Any())
-            //        {
-            //            tag.ImageGuid = Guid.NewGuid();
-            //        }
-            //        else
-            //        {
-            //            tag.ImageGuid = null;
-            //        }
-
-            //        try
-            //        {
-            //            hwManager.Persist(tag);
-            //            hwManager.LogVerbose(user.Guid, "Tag Saved");
-
-            //            if (tag.ImageGuid != null)
-            //            {
-            //                HttpFile file = Request.Files.First();
-
-            //                long fileSize = file.Value.Length;
-
-            //                try
-            //                {
-            //                    byte[] data = new byte[fileSize];
-
-            //                    file.Value.Read(data, 0, (int)fileSize);
-
-            //                    hwManager.PersistOriginal(tag.ImageGuid.Value, ".jpg", "image/jpg", data);
-            //                    hwManager.LogVerbose(user.Guid, "Tag Image Saved");
-
-            //                    Image original = ImageHelper.GetImage(data);
-
-            //                    data = ImageHelper.GetThumbnailBytesOfMaxSize(original, 800);
-            //                    hwManager.PersistWebImage(tag.ImageGuid.Value, ".jpg", "image/jpg", data);
-
-            //                    data = ImageHelper.GetThumbnailBytesOfMaxSize(original, 100);
-            //                    hwManager.PersistThumbnailImage(tag.ImageGuid.Value, ".jpg", "image/jpg", data);
-            //                }
-            //                catch (Exception ex)
-            //                {
-            //                    hwManager.LogException(user.Guid, ex);
-            //                }
-            //            }
-
-            //            return @"{ ""Result"":""Success"" }";
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            hwManager.LogException(user.Guid, ex);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        //No position
-            //        hwManager.LogWarning(user.Guid, "No position");
-
-            //        return @"{ ""Result"":""Failure - No position"" }";
-            //    }
+                            return @"{ ""Result"":""Failure - No position"" }";
+                        }
+                    }
+                }
             }
-
 
             return @"{ ""Result"":""Failure"" }";
         }
