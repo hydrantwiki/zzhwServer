@@ -46,7 +46,7 @@ namespace Site.api
                 return response;
             };
 
-            Post["/api/image"] = _parameters =>
+            Post["/api/image/{fileName}"] = _parameters =>
             {
                 Response response = (Response)HandleImagePost(_parameters);
                 response.ContentType = "application/json";
@@ -83,6 +83,11 @@ namespace Site.api
             if (AuthHelper.IsAuthorized(Request, out user))
             {
                 HydrantWikiManager hwManager = new HydrantWikiManager();
+
+                long length = Request.Body.Length;
+                byte[] fileData = new byte[(int)length];
+                Request.Body.Read(fileData, 0, (int)length);
+
                 HttpFile file = Request.Files.First();
 
                 long fileSize = file.Value.Length;
@@ -108,7 +113,7 @@ namespace Site.api
                         data = ImageHelper.GetThumbnailBytesOfMaxSize(original, 100);
                         hwManager.PersistThumbnailImage(imageGuid, ".jpg", "image/jpg", data);
 
-                        return @"{ ""Result"":""Success"" }";
+                        return @"{ ""Success"":true }";
                     }
                     catch (Exception ex)
                     {
@@ -117,7 +122,7 @@ namespace Site.api
                 }
             }
 
-            return @"{ ""Result"":""Failure"" }";
+            return @"{ ""Success"":false }";
         }
 
         private string HandleTagPost(DynamicDictionary _parameters)
@@ -149,21 +154,12 @@ namespace Site.api
                                 Status = TagStatus.Pending
                             };
 
-                            if (Request.Files.Any())
-                            {
-                                dbTag.ImageGuid = tag.ImageGuid;
-                            }
-                            else
-                            {
-                                dbTag.ImageGuid = null;
-                            }
-
                             try
                             {
                                 hwManager.Persist(dbTag);
                                 hwManager.LogVerbose(user.Guid, "Tag Saved");                               
 
-                                return @"{ ""Result"":""Success"" }";
+                                return @"{ ""Success"":true }";
                             }
                             catch (Exception ex)
                             {
@@ -175,13 +171,13 @@ namespace Site.api
                             //No position
                             hwManager.LogWarning(user.Guid, "No position");
 
-                            return @"{ ""Result"":""Failure - No position"" }";
+                            return @"{ ""Success"":false, ""Message"": ""No position"" }";
                         }
                     }
                 }
             }
 
-            return @"{ ""Result"":""Failure"" }";
+            return @"{ ""Success"":false }";
         }
 
     }
