@@ -52,6 +52,13 @@ namespace Site.api
                 response.ContentType = "application/json";
                 return response;
             };
+
+            Post["/api/image"] = _parameters =>
+            {
+                Response response = (Response)HandleImagePost(_parameters);
+                response.ContentType = "application/json";
+                return response;
+            };
         }
 
         private string Authorize(DynamicDictionary _parameters)
@@ -84,40 +91,45 @@ namespace Site.api
             {
                 HydrantWikiManager hwManager = new HydrantWikiManager();
 
-                long length = Request.Body.Length;
-                byte[] fileData = new byte[(int)length];
-                Request.Body.Read(fileData, 0, (int)length);
+                byte[] fileData = null;
+                string fileName = null;
 
-                HttpFile file = Request.Files.First();
-
-                long fileSize = file.Value.Length;
-                string fileName = file.Name;
-                string tempGuid = Path.GetFileNameWithoutExtension(fileName);
-                Guid imageGuid;
-
-                if (Guid.TryParse(tempGuid, out imageGuid))
+                if (Request.Files.Any())
                 {
-                    try
+                    HttpFile file = Request.Files.First();
+
+                    long length = file.Value.Length;
+                    fileData = new byte[(int) length];
+                    file.Value.Read(fileData, 0, (int) length);
+                    fileName = file.Name;
+                }
+
+                if (fileName != null)
+                {
+                    string tempGuid = Path.GetFileNameWithoutExtension(fileName);
+                    Guid imageGuid;
+
+                    if (Guid.TryParse(tempGuid, out imageGuid))
                     {
-                        byte[] data = new byte[fileSize];
-                        file.Value.Read(data, 0, (int) fileSize);
+                        try
+                        {
+                            hwManager.PersistOriginal(imageGuid, ".jpg", "image/jpg", fileData);
+                            hwManager.LogVerbose(user.Guid, "Tag Image Saved");
 
-                        hwManager.PersistOriginal(imageGuid, ".jpg", "image/jpg", data);
-                        hwManager.LogVerbose(user.Guid, "Tag Image Saved");
+                            Image original = ImageHelper.GetImage(fileData);
 
-                        Image original = ImageHelper.GetImage(data);
+                            fileData = ImageHelper.GetThumbnailBytesOfMaxSize(original, 800);
+                            hwManager.PersistWebImage(imageGuid, ".jpg", "image/jpg", fileData);
 
-                        data = ImageHelper.GetThumbnailBytesOfMaxSize(original, 800);
-                        hwManager.PersistWebImage(imageGuid, ".jpg", "image/jpg", data);
+                            fileData = ImageHelper.GetThumbnailBytesOfMaxSize(original, 100);
+                            hwManager.PersistThumbnailImage(imageGuid, ".jpg", "image/jpg", fileData);
 
-                        data = ImageHelper.GetThumbnailBytesOfMaxSize(original, 100);
-                        hwManager.PersistThumbnailImage(imageGuid, ".jpg", "image/jpg", data);
-
-                        return @"{ ""Success"":true }";
-                    }
-                    catch (Exception ex)
-                    {
-                        hwManager.LogException(user.Guid, ex);
+                            return @"{ ""Success"":true }";
+                        }
+                        catch (Exception ex)
+                        {
+                            hwManager.LogException(user.Guid, ex);
+                        }
                     }
                 }
             }
@@ -151,6 +163,7 @@ namespace Site.api
                                 UserGuid = user.Guid,
                                 VersionTimeStamp = DateTime.UtcNow.ToString("u"),
                                 Position = new GeoPoint(tag.Position.Longitude, tag.Position.Latitude),
+                                ImageGuid = tag.ImageGuid,
                                 Status = TagStatus.Pending
                             };
 
