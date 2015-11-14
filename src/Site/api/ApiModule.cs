@@ -7,10 +7,13 @@ using HydrantWiki.Library.Managers;
 using HydrantWiki.Library.Objects;
 using Nancy;
 using Newtonsoft.Json;
+using Site.api.Objects;
+using Site.api.Objects.Responses;
 using Site.Extensions;
 using Site.Helpers;
 using TreeGecko.Library.Common.Helpers;
 using TreeGecko.Library.Geospatial.Objects;
+using Tag = HydrantWiki.Library.Objects.Tag;
 
 namespace Site.api
 {
@@ -39,6 +42,20 @@ namespace Site.api
                 return response;
             };
 
+            Get["/api/tags/count"] = _parameters =>
+            {
+                Response response = (Response)HangleGetTagCount(_parameters);
+                response.ContentType = "application/json";
+                return response;
+            };
+
+            Get["/api/tags/mine/count"] = _parameters =>
+            {
+                Response response = (Response)HandleGetMyTagCount(_parameters);
+                response.ContentType = "application/json";
+                return response;
+            };
+
             Post["/api/tag"] = _parameters =>
             {
                 Response response = (Response) HandleTagPost(_parameters);
@@ -59,6 +76,49 @@ namespace Site.api
                 response.ContentType = "application/json";
                 return response;
             };
+        }
+
+        private string HangleGetTagCount(DynamicDictionary _parameters)
+        {
+            User user;
+            BaseResponse response;
+
+            if (AuthHelper.IsAuthorized(Request, out user))
+            {
+                HydrantWikiManager hwm = new HydrantWikiManager();
+                int count = hwm.GetTagCount();
+
+                response = new TagCountResponse(true, count);
+            }
+            else
+            {
+                response = new BaseResponse();
+                response.Success = false;
+            }
+
+            return JsonConvert.SerializeObject(response);
+        }
+
+        private string HandleGetMyTagCount(DynamicDictionary _parameters)
+        {
+            User user;
+            BaseResponse response;
+            
+            if (AuthHelper.IsAuthorized(Request, out user))
+            {
+                HydrantWikiManager hwm = new HydrantWikiManager();
+                int count = hwm.GetTagCount(user.Guid);
+
+                response = new TagCountResponse(true, count);
+            }
+            else
+            {
+                response = new BaseResponse();
+                response.Success = false;
+            }
+
+            string json = JsonConvert.SerializeObject(response);
+            return json;
         }
 
         private string Authorize(DynamicDictionary _parameters)
