@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using HydrantWiki.Library.Constants;
+using HydrantWiki.Library.Helpers;
 using HydrantWiki.Library.Managers;
 using HydrantWiki.Library.Objects;
 using Nancy;
@@ -12,8 +14,10 @@ using Site.api.Objects.Responses;
 using Site.Extensions;
 using Site.Helpers;
 using TreeGecko.Library.Common.Helpers;
+using TreeGecko.Library.Geospatial.Helpers;
 using TreeGecko.Library.Geospatial.Objects;
-using Tag = HydrantWiki.Library.Objects.Tag;
+using TreeGecko.Library.Net.Objects;
+using NearbyHydrant = Site.api.Objects.HydrantHeader;
 
 namespace Site.api
 {
@@ -76,6 +80,20 @@ namespace Site.api
                 response.ContentType = "application/json";
                 return response;
             };
+
+            Get["/api/hydrants/{east}/{west}/{north}/{south}"] = _parameters =>
+            {
+                Response response = HangleGetHydrantsByGeobox(_parameters);
+                response.ContentType = "application/json"; ;
+                return response;
+            };
+
+            Get["/api/hydrants/{latitude}/{longitude}/{distance}"] = _parameters =>
+            {
+                Response response = HangleGetHydrantsByCenterDistance(_parameters);
+                response.ContentType = "application/json";
+                return response;
+            };
         }
 
         private string HangleGetTagCount(DynamicDictionary _parameters)
@@ -92,8 +110,7 @@ namespace Site.api
             }
             else
             {
-                response = new BaseResponse();
-                response.Success = false;
+                response = new BaseResponse {Success = false};
             }
 
             return JsonConvert.SerializeObject(response);
@@ -113,8 +130,7 @@ namespace Site.api
             }
             else
             {
-                response = new BaseResponse();
-                response.Success = false;
+                response = new BaseResponse {Success = false};
             }
 
             string json = JsonConvert.SerializeObject(response);
@@ -215,7 +231,7 @@ namespace Site.api
                     {
                         if (tag.Position != null)
                         {
-                            Tag dbTag = new Tag
+                            var dbTag = new HydrantWiki.Library.Objects.Tag
                             {
                                 Active = true,
                                 DeviceDateTime = tag.Position.DeviceDateTime,
@@ -253,5 +269,88 @@ namespace Site.api
             return @"{ ""Success"":false }";
         }
 
+        public string HangleGetHydrantsByCenterDistance(DynamicDictionary _parameters)
+        {
+            double latitude = Convert.ToDouble((string)_parameters["latitude"]);
+            double longitude = Convert.ToDouble((string)_parameters["longitude"]);
+            double distance = Convert.ToDouble((string)_parameters["distance"]);
+
+            HydrantWikiManager hwm = new HydrantWikiManager();
+            GeoPoint center = new GeoPoint(longitude, latitude);
+
+            List<Hydrant> hydrants = hwm.GetHydrants(center, distance);
+
+            List<HydrantHeader> headers = ProcessHydrants(hydrants, center);
+
+            HydrantQueryResponse response = new HydrantQueryResponse {Success = true, Hydrants = headers};
+
+            return JsonConvert.SerializeObject(response);
+        }
+
+        public string HangleGetHydrantsByGeobox(DynamicDictionary _parameters)
+        {
+            HydrantWikiManager hwm = new HydrantWikiManager();
+
+            double east = Convert.ToDouble((string)_parameters["east"]);
+            double west = Convert.ToDouble((string)_parameters["west"]);
+            double north = Convert.ToDouble((string)_parameters["north"]);
+            double south = Convert.ToDouble((string)_parameters["south"]);
+
+            GeoBox geobox = new GeoBox(east, west, north, south);
+
+            List<Hydrant> hydrants = hwm.GetHydrants(geobox);
+
+            List<HydrantHeader> headers = ProcessHydrants(hydrants);
+
+            HydrantQueryResponse response = new HydrantQueryResponse { Success = true, Hydrants = headers };
+
+            return JsonConvert.SerializeObject(response);
+        }
+
+        private List<HydrantHeader> ProcessHydrants(IEnumerable<Hydrant> _hydrants, GeoPoint _center = null)
+        {
+            HydrantWikiManager hwm = new HydrantWikiManager();
+            Dictionary<Guid, string> users = new Dictionary<Guid, string>();
+
+            var output = new List<HydrantHeader>();
+            foreach (var hydrant in _hydrants)
+            {
+                string username;
+                Guid userGuid = hydrant.OriginalTagUserGuid;
+
+                if (users.ContainsKey(userGuid))
+                {
+                    username = users[userGuid];
+                }
+                else
+                {
+                    TGUser user = hwm.GetUser(userGuid);
+                    users.Add(user.Guid, user.Username);
+                    username = user.Username;
+                }
+
+                var outputHydrant = new HydrantHeader
+                {
+                    HydrantGuid = hydrant.Guid,
+                    Position = new GeoLocation(hydrant.Position.Y, hydrant.Position.X, 0),
+                    ThumbnailUrl = hydrant.ThumbnailUrl,
+                    ImageUrl = hydrant.ImageUrl,
+                    Username = username
+                };
+
+                if (_center == null)
+                {
+                    outputHydrant.DistanceInFeet = null;
+                }
+                else
+                {
+                    outputHydrant.DistanceInFeet = PositionHelper.GetDistance(_center, hydrant.Position).ToFeet();
+                }
+
+                output.Add(outputHydrant);
+            }
+
+            return output;
+        }
     }
 }

@@ -148,8 +148,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="api\ApiModule.cs" />
+    <Compile Include="api\Objects\GeoLocation.cs" />
+    <Compile Include="api\Objects\HydrantHeader.cs" />
     <Compile Include="api\Objects\Responses\BaseResponse.cs" />
     <Compile Include="api\Objects\Position.cs" />
+    <Compile Include="api\Objects\Responses\HydrantQueryResponse.cs" />
     <Compile Include="api\Objects\Responses\TagCountResponse.cs" />
     <Compile Include="api\Objects\Tag.cs" />
     <Compile Include="Bootstrapper\CustomBootstrapper.cs" />
