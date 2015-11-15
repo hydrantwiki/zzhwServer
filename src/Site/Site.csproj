@@ -71,13 +71,13 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MongoDB.Bson, Version=1.8.1.20, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\bin\MongoDB\MongoDB.Bson.dll</HintPath>
+    <Reference Include="MongoDB.Bson, Version=1.10.1.73, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <HintPath>packages\mongocsharpdriver.1.10.1\lib\net35\MongoDB.Bson.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="MongoDB.Driver, Version=1.8.1.20, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\bin\MongoDB\MongoDB.Driver.dll</HintPath>
+    <Reference Include="MongoDB.Driver, Version=1.10.1.73, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <HintPath>packages\mongocsharpdriver.1.10.1\lib\net35\MongoDB.Driver.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Nancy, Version=0.23.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Nancy.0.23.2\lib\net40\Nancy.dll</HintPath>
@@ -91,9 +91,9 @@
       <HintPath>packages\Nancy.Hosting.Aspnet.0.23.2\lib\net40\Nancy.Hosting.Aspnet.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\bin\Newtonsoft\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -101,6 +101,26 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
+    <Reference Include="tgAWS, Version=1.0.28.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>packages\TreeGeckoLibraries.AWS.1.0.28.0\lib\net40\tgAWS.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="tgCommonLibrary, Version=1.0.28.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>packages\TreeGeckoLibraries.Common.1.0.28.0\lib\net40\tgCommonLibrary.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="tgGeoframeworks, Version=1.0.28.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>packages\TreeGeckoLibraries.Geospatial.1.0.28.0\lib\net40\tgGeoframeworks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="tgMongo, Version=1.0.28.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>packages\TreeGeckoLibraries.Mongo.1.0.28.0\lib\net40\tgMongo.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="tgNet, Version=1.0.28.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>packages\TreeGeckoLibraries.Net.1.0.28.0\lib\net40\tgNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\fire-hydrant-2.png">
@@ -231,26 +251,6 @@
     <Folder Include="Templates\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\TreeGecko\Libraries\src\tgAWS\tgAWS.csproj">
-      <Project>{02F95722-ADB3-4DE3-8FBA-DF62D39F836B}</Project>
-      <Name>tgAWS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\TreeGecko\Libraries\src\tgCommonLibrary\tgCommonLibrary.csproj">
-      <Project>{64FE4175-4C97-4835-AD97-3C4F19E7B4DA}</Project>
-      <Name>tgCommonLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\TreeGecko\Libraries\src\tgGeospatial\tgGeospatial.csproj">
-      <Project>{17BE4975-0A99-490E-AA0A-99F6D38F6B8D}</Project>
-      <Name>tgGeospatial</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\TreeGecko\Libraries\src\tgMongo\tgMongo.csproj">
-      <Project>{30C94612-2107-49FD-BEA7-9789AF896B01}</Project>
-      <Name>tgMongo</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\TreeGecko\Libraries\src\tgNet\tgNet.csproj">
-      <Project>{E6DF32BB-18C9-4BD8-882A-A0CB67383A40}</Project>
-      <Name>tgNet</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\hwDataLibrary\src\hwDataLibrary\hwDataLibrary.csproj">
       <Project>{E2F02884-CE3D-4321-9107-F25C050881B1}</Project>
       <Name>hwDataLibrary</Name>

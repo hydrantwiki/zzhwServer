@@ -1,0 +1,22 @@
+version: 1.0.{build}
+
+before_build:
+  - nuget restore src/Site/Site.sln
+
+assembly_info:
+  patch: true
+  file: AssemblyInfo.*
+  assembly_version: "1.0.{build}"
+  assembly_file_version: "{version}"
+  assembly_informational_version: "{version}"
+
+cache:
+  - src/Site/packages -> **\packages.config 
+  
+platform: x64
+
+configuration: Debug
+  
+build:
+  project: src/Site/Site.sln
+  verbosity: Minimal 
