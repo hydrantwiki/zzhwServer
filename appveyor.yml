@@ -19,7 +19,6 @@ nuget:
   
 cache:
   - src/Site/packages -> **\packages.config 
-  - hwDataLibrary/src/packages -> **\packages.config 
   
 platform: x64
 
