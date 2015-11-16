@@ -3,6 +3,9 @@ version: 1.0.{build}
 before_build:
   - nuget restore src/Site/Site.sln
 
+install:
+  git submodule update --init --recursive
+
 assembly_info:
   patch: true
   file: AssemblyInfo.*
