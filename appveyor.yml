@@ -2,6 +2,7 @@ version: 1.0.{build}
 
 before_build:
   - git submodule update --init --recursive
+  - nuget restore hwDataLibrary/src/hwDataLibrary.sln
   - nuget restore src/Site/Site.sln
 
 assembly_info:
