@@ -1,0 +1,3 @@
+[submodule "hwDataLibrary"]
+	path = hwDataLibrary
+	url = https://github.com/hydrantwiki/hwDataLibrary.git
