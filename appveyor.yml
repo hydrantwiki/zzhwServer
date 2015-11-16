@@ -27,4 +27,5 @@ configuration: Debug
   
 build:
   project: src/Site/Site.sln
+  publish_wap_xcopy: true 
   verbosity: Minimal 
