@@ -26,6 +26,5 @@ platform: x64
 configuration: Debug
   
 build:
-  project: hwDataLibrary/src/hwDataLibrary.sln
   project: src/Site/Site.sln
   verbosity: Minimal 
