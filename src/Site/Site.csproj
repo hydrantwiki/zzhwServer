@@ -251,8 +251,8 @@
     <Folder Include="Templates\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\hwDataLibrary\src\hwDataLibrary\hwDataLibrary.csproj">
-      <Project>{E2F02884-CE3D-4321-9107-F25C050881B1}</Project>
+    <ProjectReference Include="..\..\hwDataLibrary\src\hwDataLibrary\hwDataLibrary.csproj">
+      <Project>{e2f02884-ce3d-4321-9107-f25c050881b1}</Project>
       <Name>hwDataLibrary</Name>
     </ProjectReference>
   </ItemGroup>
