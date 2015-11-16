@@ -3,5 +3,4 @@ src/Site/bin/
 *.suo
 src/Site/obj/
 src/Site/Web.config
-src/Site/.nuget/
 src/Site/packages/
