@@ -88,6 +88,13 @@ namespace Site.api
                 return response;
             };
 
+            Get["/api/hydrants/{east}/{west}/{north}/{south}/{quantity}"] = _parameters =>
+            {
+                Response response = HangleGetHydrantsByGeobox(_parameters);
+                response.ContentType = "application/json"; ;
+                return response;
+            };
+
             Get["/api/hydrants/{latitude}/{longitude}/{distance}"] = _parameters =>
             {
                 Response response = HangleGetHydrantsByCenterDistance(_parameters);
@@ -296,9 +303,19 @@ namespace Site.api
             double north = Convert.ToDouble((string)_parameters["north"]);
             double south = Convert.ToDouble((string)_parameters["south"]);
 
+            int quantity = 250;
+            if (_parameters.ContainsKey("quantity"))
+            {
+                quantity = Convert.ToInt32((string) _parameters["quantity"]);
+            }
+            if (quantity > 500)
+            {
+                quantity = 500;
+            }
+
             GeoBox geobox = new GeoBox(east, west, north, south);
 
-            List<Hydrant> hydrants = hwm.GetHydrants(geobox);
+            List<Hydrant> hydrants = hwm.GetHydrants(geobox, quantity);
 
             List<HydrantHeader> headers = ProcessHydrants(hydrants);
 
