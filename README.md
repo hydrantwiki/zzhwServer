@@ -1,8 +1,7 @@
 Hydrant Wiki - hwServer
 ========
 
-HydrantWiki is a web based crowd sourced data collection application for creating a geolocated fire hydrant database.
+Please use the repo found under HydrantWikiServer 
 
-The system has been written in C# using NancyFX framework.  It stores data against a MongoDB database.
+This will be retired.
 
-For more information see http://www.hydrantwiki.com.
