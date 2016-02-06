@@ -81,21 +81,21 @@ namespace Site.api
                 return response;
             };
 
-            Get["/api/hydrants/{east}/{west}/{north}/{south}"] = _parameters =>
+            Get["/api/hydrants/box/{east:double}/{west:double}/{north:double}/{south:double}"] = _parameters =>
             {
                 Response response = HangleGetHydrantsByGeobox(_parameters);
                 response.ContentType = "application/json"; ;
                 return response;
             };
 
-            Get["/api/hydrants/{east}/{west}/{north}/{south}/{quantity}"] = _parameters =>
+            Get["/api/hydrants/box/{east:double}/{west:double}/{north:double}/{south:double}/{quantity:int}"] = _parameters =>
             {
                 Response response = HangleGetHydrantsByGeobox(_parameters);
                 response.ContentType = "application/json"; ;
                 return response;
             };
 
-            Get["/api/hydrants/{latitude}/{longitude}/{distance}"] = _parameters =>
+            Get["/api/hydrants/{latitude:double}/{longitude:double}/{distance:double}"] = _parameters =>
             {
                 Response response = HangleGetHydrantsByCenterDistance(_parameters);
                 response.ContentType = "application/json";

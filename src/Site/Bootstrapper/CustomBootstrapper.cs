@@ -29,7 +29,7 @@ namespace Site.Bootstrapper
 
             FormsAuthentication.Enable(_pipelines, formsAuthConfiguration);
         }
-
+        
         protected override void ConfigureConventions(NancyConventions _conventions)
         {
             base.ConfigureConventions(_conventions);

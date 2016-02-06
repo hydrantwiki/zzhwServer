@@ -79,16 +79,16 @@
       <HintPath>packages\mongocsharpdriver.1.10.1\lib\net35\MongoDB.Driver.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Nancy, Version=0.23.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Nancy.0.23.2\lib\net40\Nancy.dll</HintPath>
+    <Reference Include="Nancy, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Nancy.1.4.1\lib\net40\Nancy.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Nancy.Authentication.Forms, Version=0.23.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Nancy.Authentication.Forms.0.23.2\lib\net40\Nancy.Authentication.Forms.dll</HintPath>
+    <Reference Include="Nancy.Authentication.Forms, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Nancy.Authentication.Forms.1.4.1\lib\net40\Nancy.Authentication.Forms.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Nancy.Hosting.Aspnet, Version=0.23.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Nancy.Hosting.Aspnet.0.23.2\lib\net40\Nancy.Hosting.Aspnet.dll</HintPath>
+    <Reference Include="Nancy.Hosting.Aspnet, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Nancy.Hosting.Aspnet.1.4.1\lib\net40\Nancy.Hosting.Aspnet.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
